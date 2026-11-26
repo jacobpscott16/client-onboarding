@@ -193,6 +193,7 @@ const SEC={
   {id:"bundle",type:"select",req:1,rr:1,l:T("Which bundle would you like?","Welches Paket möchten Sie?"),h:T("Prices are one-time for the whole project. Not sure? Choose the last option and we will pick the best fit.","Die Preise gelten einmalig für das gesamte Projekt. Unsicher? Wählen Sie die letzte Option, dann wählen wir das passende Paket."),o:bundleOpts},
   {id:"followup",type:"select",rr:1,l:T("Would you like a follow-up email after 7 days?","Möchten Sie eine Erinnerungs-E-Mail nach 7 Tagen?"),o:T([`Yes (+${money(PRICING.followup)}, once per project)`,"No"],[`Ja (+${money(PRICING.followup)}, einmal pro Projekt)`,"Nein"])},
   {id:"areas",type:"select",rr:1,show:build,l:T("How many additional search areas do you need?","Wie viele zusätzliche Suchbereiche brauchen Sie?"),h:T(`A search area is a clearly different region, genre, or target group. Your main search is included. Each additional area costs ${money(PRICING.area)} (one-time).`,`Ein Suchbereich ist eine klar andere Region, ein anderes Genre oder eine andere Zielgruppe. Ihre Hauptsuche ist inklusive. Jeder zusätzliche Bereich kostet ${money(PRICING.area)} (einmalig).`),o:T(["None","1","2","3 or more"],["Keine","1","2","3 oder mehr"])},
+  {id:"extra_sprints",type:"select",rr:1,l:T("Would you like to add more 4-week sprints?","Möchten Sie weitere 4-Wochen-Sprints hinzufügen?"),h:T(`For a longer campaign. Each extra sprint runs right after the last and costs ${money(extraSprint("own"))}, or ${money(extraSprint("build"))} when we build your list. It is paid when it starts.`,`Für eine längere Kampagne. Jeder weitere Sprint schließt direkt an und kostet ${money(extraSprint("own"))}, oder ${money(extraSprint("build"))}, wenn wir Ihre Liste erstellen. Er wird zu seinem Beginn bezahlt.`),o:T(["None","1 (+4 weeks)","2 (+8 weeks)","3 (+12 weeks)","4 (+16 weeks)","5 (+20 weeks)"],["Keine","1 (+4 Wochen)","2 (+8 Wochen)","3 (+12 Wochen)","4 (+16 Wochen)","5 (+20 Wochen)"])},
   {id:"languages",type:"text",req:1,l:T("Which language or languages should the emails be in?","In welcher Sprache bzw. welchen Sprachen sollen die E-Mails verfasst werden?")},
   {id:"lang_count",type:"select",req:1,rr:1,l:T("How many languages in total?","Wie viele Sprachen insgesamt?"),o:T(["1 (included)","2","3","4 or more"],["1 (inklusive)","2","3","4 oder mehr"])},
   {id:"lang_note",type:"note",t:T(`One language is included. Each additional language costs ${money(PRICING.language)} (one-time).`,`Eine Sprache ist inklusive. Jede weitere Sprache kostet ${money(PRICING.language)} (einmalig).`)},
@@ -269,6 +270,8 @@ function estimate(lg){
   if(n>1){lines.push([lg==="de"?`${n-1} zusätzliche Sprache(n)`:`${n-1} additional language${n-1>1?"s":""}`,(n-1)*PRICING.language]);total+=(n-1)*PRICING.language}
   const ar=routeOf(A)==="build"?(parseInt(A.areas||"0",10)||0):0;
   if(ar>0){lines.push([lg==="de"?`${ar} zusätzliche(r) Suchbereich(e)`:`${ar} additional search area${ar>1?"s":""}`,ar*PRICING.area]);total+=ar*PRICING.area}
+  const xs=parseInt(A.extra_sprints||"0",10)||0;
+  if(xs>0){const per=extraSprint(routeOf(A)||"own");lines.push([lg==="de"?`${xs} weitere${xs>1?"":"r"} 4-Wochen-Sprint${xs>1?"s":""}`:`${xs} more 4-week sprint${xs>1?"s":""}`,xs*per]);total+=xs*per}
   const more=/or more|mehr/.test((A.lang_count||"")+" "+(A.areas||""));
   return {lines,total,pending,more};
 }
@@ -468,6 +471,7 @@ function applyPkg(){
   answers.lang_count=opt("lang_count",Math.min(3,Math.max(0,(+p.l||1)-1)));
   if(route==="build")answers.areas=opt("areas",Math.min(3,Math.max(0,+p.a||0)));else delete answers.areas;
   answers.first_project=opt("first_project",p.rep?1:0);
+  answers.extra_sprints=opt("extra_sprints",Math.min(5,Math.max(0,+p.x||0)));
   answers._pkgApplied=raw;save();
 }
 /* ----------------------------------- boot ----------------------------------- */

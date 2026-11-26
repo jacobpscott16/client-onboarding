@@ -25,3 +25,5 @@ const PRICING={cur:"€",followup:GRID.followup,language:GRID.language,area:GRID
  best:T("Pick the best bundle for my case","Das passende Paket für meinen Fall auswählen")};
 const money=n=>PRICING.cur+n;
 const bLabel=(b,lg)=>`${b[lg]} (${money(b.price)})`;
+/* One more 4-week sprint after the first: base sprint, plus the lead generation part when we build the list. */
+const extraSprint=route=>route==="build"?GRID.base.s4+GRID.lg.s4:GRID.base.s4;

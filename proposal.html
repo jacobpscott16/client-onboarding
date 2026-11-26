@@ -172,6 +172,8 @@ const C={
   q1:"Do you already have a list of people to contact?",haveB:"Yes, I have a list",haveS:"We write to the people you give us.",findB:"No, find them for me",findS:"We search, research, and qualify new contacts.",rec:"Recommended",
   q2:"How long should it run?",w2:"2 weeks",w2s:"about 120 contacts",w4:"4 weeks",w4s:"about 240 contacts",
   q3:"Extras",fuB:"7-day follow-up",fuS:"One friendly reminder. Often doubles the replies.",langB:"Email languages",langS:"One is included. Each extra language",areaB:"Extra search areas",areaS:"Another region, genre, or target group",repB:"I have worked with you before",repS:"Returning clients get a reduced set-up.",each:"each",
+  moreB:"Add more 4-week sprints",moreS:"Planning a longer campaign? Each extra sprint runs right after the last: {p}, paid when it starts.",
+  lnMore:n=>`${n} more 4-week sprint${n>1?"s":""}`,runs:w=>`Runs about ${w} weeks and reaches about ${w*60} contacts.`,payLater:p=>`${p} of this is paid at the start of the later sprints.`,
   yourPkg:"Your package",estimate:"Estimated total",fine:"Net prices; VAT is added where it applies. We confirm a final quote after your questionnaire.",
   notSure:"Not sure? Let us recommend a package",bundleBest:"We recommend your package",
   lnRepeat:"Returning client: reduced set-up",lnFu:"7-day follow-up",lnLang:n=>`${n} extra language${n>1?"s":""}`,lnArea:n=>`${n} extra search area${n>1?"s":""}`,
@@ -197,6 +199,8 @@ const C={
   q1:"Haben Sie bereits eine Liste mit Kontakten?",haveB:"Ja, ich habe eine Liste",haveS:"Wir schreiben die Personen an, die Sie uns geben.",findB:"Nein, bitte finden Sie sie",findS:"Wir suchen, recherchieren und prüfen neue Personen.",rec:"Empfohlen",
   q2:"Wie lange soll es laufen?",w2:"2 Wochen",w2s:"etwa 120 Personen",w4:"4 Wochen",w4s:"etwa 240 Personen",
   q3:"Extras",fuB:"Follow-up nach 7 Tagen",fuS:"Eine freundliche Erinnerung. Verdoppelt oft die Antworten.",langB:"Sprachen der E-Mails",langS:"Eine ist inklusive. Jede weitere Sprache",areaB:"Zusätzliche Suchbereiche",areaS:"Weitere Region, Genre oder Zielgruppe",repB:"Wir haben schon zusammengearbeitet",repS:"Bestehende Kunden zahlen eine reduzierte Einrichtung.",each:"je",
+  moreB:"Weitere 4-Wochen-Sprints",moreS:"Längere Kampagne geplant? Jeder weitere Sprint schließt direkt an: {p}, bezahlt zu seinem Beginn.",
+  lnMore:n=>`${n} weitere${n>1?"":"r"} 4-Wochen-Sprint${n>1?"s":""}`,runs:w=>`Laufzeit etwa ${w} Wochen, etwa ${w*60} Kontakte.`,payLater:p=>`Davon werden ${p} jeweils zu Beginn der späteren Sprints bezahlt.`,
   yourPkg:"Ihr Paket",estimate:"Geschätzte Summe",fine:"Nettopreise; die Mehrwertsteuer kommt hinzu, wo sie anfällt. Nach dem Fragebogen bestätigen wir ein endgültiges Angebot.",
   notSure:"Unsicher? Lassen Sie uns ein Paket empfehlen",bundleBest:"Wir empfehlen Ihr Paket",
   lnRepeat:"Bestehender Kunde: reduzierte Einrichtung",lnFu:"Follow-up nach 7 Tagen",lnLang:n=>`${n} zusätzliche Sprache${n>1?"n":""}`,lnArea:n=>`${n} zusätzliche(r) Suchbereich(e)`,
@@ -216,7 +220,7 @@ const C={
 const PC={"singer-search":{
  en:{title:"Let's find the right voice for your song",lede:"We find singers who fit your song, write to each one personally, and introduce you to the ones who are interested.",
   q1:"Do you already have a list of singers?",haveS:"We write to the singers you give us.",findS:"We search, research, and qualify new singers.",
-  w2s:"about 120 singers",w4s:"about 240 singers",areaS:"Another region, genre, or voice type",listOnly:"Only need a list, no sending? We research up to about 150 singers for {p}.",
+  w2s:"about 120 singers",w4s:"about 240 singers",runs:w=>`Runs about ${w} weeks and reaches about ${w*60} singers.`,areaS:"Another region, genre, or voice type",listOnly:"Only need a list, no sending? We research up to about 150 singers for {p}.",
   th:["","You have a list","We find the singers"],
   needs:[["target","Your goal","What you want from this outreach."],["mic","Your ideal singer","Style, voice, language, location."],["link","Your work","Spotify, Apple Music, YouTube, your demo and files."],["check","Offer and approvals","What you offer, any deadline, who approves."]]},
  de:{title:"Finden wir die richtige Stimme für Ihren Song",lede:"Wir finden Sängerinnen und Sänger, die zu Ihrem Song passen, schreiben jede Person persönlich an und stellen Ihnen die Interessierten vor.",
@@ -226,7 +230,7 @@ const PROJECT=PC[params.get("p")]?params.get("p"):"general";
 const cc=()=>({...C[lang],...((PC[PROJECT]||{})[lang]||{})});
 
 /* package state: defaults to the recommended Lead Gen Full with follow-up */
-let S={r:"build",w:4,fu:true,l:1,a:0,rep:false,best:false};
+let S={r:"build",w:4,fu:true,l:1,a:0,x:0,rep:false,best:false};
 function bundle(){const key={own2:"starter",own4:"standard",build2:"lgstarter",build4:"lgfull"}[S.r+S.w];return PRICING.bundles.find(b=>b.key===key)}
 function calc(){
   const c=cc(),b=bundle(),L=[];let total=0;
@@ -234,11 +238,13 @@ function calc(){
   if(S.fu){L.push([c.lnFu,G.followup]);total+=G.followup}
   if(S.l>1){L.push([c.lnLang(S.l-1),(S.l-1)*G.language]);total+=(S.l-1)*G.language}
   if(S.r==="build"&&S.a>0){L.push([c.lnArea(S.a),S.a*G.area]);total+=S.a*G.area}
-  return {L,total,title:S.best?c.bundleBest:b.name};
+  const later=S.x*extraSprint(S.r);
+  if(S.x>0){L.push([c.lnMore(S.x),later]);total+=later}
+  return {L,total,later,weeks:S.w+4*S.x,title:S.best?c.bundleBest:b.name};
 }
 function startUrl(){
   const q=new URLSearchParams();["c","name"].forEach(k=>params.get(k)&&q.set(k,params.get(k)));if(PROJECT!=="general")q.set("p",PROJECT);q.set("lang",lang);
-  q.set("pkg",JSON.stringify({r:S.r,w:S.w,fu:S.fu?1:0,l:S.l,a:S.r==="build"?S.a:0,rep:S.rep?1:0,best:S.best?1:0}));
+  q.set("pkg",JSON.stringify({r:S.r,w:S.w,fu:S.fu?1:0,l:S.l,a:S.r==="build"?S.a:0,x:S.x,rep:S.rep?1:0,best:S.best?1:0}));
   return CFG.FORM+"?"+q;
 }
 const sw=(id,on)=>`<button class="sw" role="switch" aria-checked="${on}" data-sw="${id}"></button>`;
@@ -258,12 +264,13 @@ function renderPkg(){
       <div class="row"><div class="t"><b>${c.fuB} · ${eur(G.followup)}</b><small>${c.fuS}</small></div>${sw("fu",S.fu)}</div>
       <div class="row"><div class="t"><b>${c.langB}</b><small>${c.langS} ${eur(G.language)}</small></div>${stp("l",S.l)}</div>
       <div class="row${S.r==="build"?"":" off"}"><div class="t"><b>${c.areaB} · ${eur(G.area)} ${c.each}</b><small>${c.areaS}</small></div>${stp("a",S.r==="build"?S.a:0)}</div>
+      <div class="row"><div class="t"><b>${c.moreB}</b><small>${c.moreS.replace("{p}",eur(extraSprint(S.r)))}</small></div>${stp("x",S.x)}</div>
       <div class="row"><div class="t"><b>${c.repB}</b><small>${c.repS}</small></div>${sw("rep",S.rep)}</div></div>
    </div>
    <aside class="summary"><div class="head"><small>${c.yourPkg}</small><h3>${esc(e.title)}</h3></div>
     <div class="lines">${e.L.map(([t,v])=>`<div class="ln"><span>${esc(t)}</span><span>${v===null?"":(v<0?"− ":"")+eur(Math.abs(v))}</span></div>`).join("")}</div>
     <div class="tot"><span>${c.estimate}</span><b>${S.best&&!e.total?"–":(S.best?"+ ":"")+eur(e.total)}</b></div>
-    <div class="foot"><p class="fine">${c.fine}</p><a class="btn xl" href="${esc(startUrl())}">${c.start} ${ICON.arrow}</a>
+    <div class="foot"><p class="fine" style="color:var(--ink)">${c.runs(e.weeks)}${e.later?" "+c.payLater(eur(e.later)):""}</p><p class="fine">${c.fine}</p><a class="btn xl" href="${esc(startUrl())}">${c.start} ${ICON.arrow}</a>
      <p style="text-align:center;margin:12px 0 0"><button class="link" data-best="1">${S.best?"✓ ":""}${c.notSure}</button></p></div></aside>`;
   $("#bar").innerHTML=`<div class="in"><div class="sum"><span>${c.yourPkg}: ${esc(e.title)} · </span>${c.barTotal}<b>${S.best&&!e.total?"–":(S.best?"+ ":"")+eur(e.total)}</b></div><a class="btn" href="${esc(startUrl())}">${c.start} ${ICON.arrow}</a></div>`;
   document.querySelectorAll(".startbox a.btn").forEach(a=>a.href=startUrl());
@@ -306,7 +313,7 @@ document.addEventListener("click",e=>{
   if(d.r){S.r=d.r;if(S.r==="own")S.a=0}
   else if(d.w)S.w=+d.w;
   else if(d.sw)S[d.sw]=!S[d.sw];
-  else if(d.inc)S[d.inc]=Math.min(d.inc==="l"?4:3,S[d.inc]+1);
+  else if(d.inc)S[d.inc]=Math.min({l:4,a:3,x:5}[d.inc],S[d.inc]+1);
   else if(d.dec)S[d.dec]=Math.max(d.dec==="l"?1:0,S[d.dec]-1);
   else if(d.best)S.best=!S.best;
   else return;
