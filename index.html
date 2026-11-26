@@ -109,7 +109,7 @@ const UI = {
   consent:"I agree that my answers and files are stored and used to prepare my outreach campaign, as described in the privacy notice above.",
   privacy:"Privacy notice",privacyText:"We use your answers and files only to prepare and run your campaign. They are stored in a private Google Drive folder that only the team can open. We keep them until the project ends plus 12 months, then delete them. You can ask us to see, correct, or delete your data at any time by email.",
   send:"Confirm and send",sending:"Sending…",required:"This field is required.",badEmail:"Please enter a valid email address.",
-  doneTitle:"Thank you, your answers are in.",doneText:"A copy is on its way to your inbox. We will review everything and come back to you with the next steps.",
+  doneTitle:"Thank you, your answers are in.",doneText:"A copy is on its way to your inbox. We will review everything and come back to you with the next steps.",doneTextOpen:"We will review everything and come back to you by email with the next steps.",
   files:"Files (optional)",filesHint:"Drop files here or click to choose.",filesLimit:(f,t,n)=>`Up to ${n} files, ${f} MB each, ${t} MB in total.`,
   tooBig:(f)=>`“${f}” is over the size limit.`,tooMany:"You have reached the maximum number of files.",badType:(f)=>`“${f}” has a file type we cannot accept.`,totalBig:"The total size is over the limit.",
   modalBig:"That file is larger than our upload limit. No problem: please email it to us directly and we will add it to your folder.",modalMail:"Email the file",close:"Close",
@@ -121,7 +121,7 @@ const UI = {
   consent:"Ich bin einverstanden, dass meine Antworten und Dateien gespeichert und zur Vorbereitung meiner Outreach-Kampagne verwendet werden, wie in der Datenschutzerklärung oben beschrieben.",
   privacy:"Datenschutz",privacyText:"Wir verwenden Ihre Antworten und Dateien ausschließlich, um Ihre Kampagne vorzubereiten und durchzuführen. Sie werden in einem privaten Google-Drive-Ordner gespeichert, den nur unser Team öffnen kann. Wir bewahren sie bis zum Projektende plus 12 Monate auf und löschen sie dann. Sie können jederzeit per E-Mail Auskunft, Berichtigung oder Löschung verlangen.",
   send:"Bestätigen und senden",sending:"Wird gesendet…",required:"Dieses Feld ist erforderlich.",badEmail:"Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-  doneTitle:"Vielen Dank, Ihre Antworten sind bei uns.",doneText:"Eine Kopie ist unterwegs in Ihr Postfach. Wir prüfen alles und melden uns mit den nächsten Schritten.",
+  doneTitle:"Vielen Dank, Ihre Antworten sind bei uns.",doneText:"Eine Kopie ist unterwegs in Ihr Postfach. Wir prüfen alles und melden uns mit den nächsten Schritten.",doneTextOpen:"Wir prüfen alles und melden uns per E-Mail mit den nächsten Schritten.",
   files:"Dateien (optional)",filesHint:"Dateien hierher ziehen oder klicken.",filesLimit:(f,t,n)=>`Bis zu ${n} Dateien, je ${f} MB, insgesamt ${t} MB.`,
   tooBig:(f)=>`„${f}“ ist größer als erlaubt.`,tooMany:"Sie haben die maximale Anzahl an Dateien erreicht.",badType:(f)=>`„${f}“ hat ein Dateiformat, das wir nicht annehmen können.`,totalBig:"Die Gesamtgröße liegt über dem Limit.",
   modalBig:"Diese Datei ist größer als unser Upload-Limit. Kein Problem: Bitte schicken Sie sie uns direkt per E-Mail, wir legen sie in Ihrem Ordner ab.",modalMail:"Datei per E-Mail senden",close:"Schließen",
@@ -219,7 +219,7 @@ const Q={};for(const [k,pr] of Object.entries(PROJECTS))Q[k]=pr.sections.map(id=
 const $ = (s,r=document)=>r.querySelector(s);
 const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const params = new URLSearchParams(location.search);
-const TOKEN = params.get("c")||"";
+let TOKEN = params.get("c")||"";   // empty = open mode; the backend hands back a token on the first upload or submit
 const DEMO = !CONFIG.SCRIPT_URL;
 let lang = (params.get("lang")||navigator.language||"en").toLowerCase().startsWith("de")?"de":"en";
 let client = null, step = 0, answers = {}, files = [], started = Date.now(), sending = false;
@@ -233,13 +233,14 @@ const ext=n=>(n.split(".").pop()||"").toLowerCase();
 
 async function api(body){
   if(DEMO){await new Promise(r=>setTimeout(r,500));return {ok:true,demo:true}}
-  const r=await fetch(CONFIG.SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({token:TOKEN,...body})});
-  return r.json();
+  const r=await fetch(CONFIG.SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({token:TOKEN,project:client&&client.project,...body})});
+  const j=await r.json();if(j.token)TOKEN=j.token;return j;
 }
 async function hello(){
   if(DEMO)return {ok:true,name:params.get("name")||"Alex",lang,project:PROJECTS[params.get("p")]?params.get("p"):"general"};
-  if(!TOKEN)return {ok:false};
-  try{const r=await fetch(CONFIG.SCRIPT_URL+"?action=hello&t="+encodeURIComponent(TOKEN));return await r.json();}catch(e){return {ok:false}}
+  try{const r=await fetch(CONFIG.SCRIPT_URL+"?action=hello&t="+encodeURIComponent(TOKEN));const h=await r.json();
+    if(h.ok&&h.open)return {ok:true,open:true,name:params.get("name")||"",project:PROJECTS[params.get("p")]?params.get("p"):"general"};
+    return h;}catch(e){return {ok:false}}
 }
 
 /* --------------------------------- rendering -------------------------------- */
@@ -451,7 +452,7 @@ async function submit(){
       consent:true,hp:$("#hp").value,elapsedMs:Date.now()-started});
     if(!r.ok)throw new Error(r.error||"submit");
     clearSaved();
-    shell(`<div class="done"><div class="tick">✓</div><h2>${t("doneTitle")}</h2><p class="sub">${t("doneText")}</p></div>`,0,0);
+    shell(`<div class="done"><div class="tick">✓</div><h2>${t("doneTitle")}</h2><p class="sub">${t(client.open?"doneTextOpen":"doneText")}</p></div>`,0,0);
   }catch(e){sending=false;btn.disabled=false;btn.textContent=t("send");showErr("#serr",t("submitFail"))}
 }
 
@@ -477,7 +478,7 @@ $("#lEN").onclick=()=>setLang("en");$("#lDE").onclick=()=>setLang("de");
   const h=await hello();
   if(h.done){shell(`<div class="done"><div class="tick">✓</div><h2>${t("doneTitle")}</h2><p class="sub">${t("doneText")}</p></div>`,0,0);return}
   if(!h.ok||!Q[h.project||"general"]){shell(`<h2>${t("invalid")}</h2>`,0,0);return}
-  client={name:h.name||"",project:h.project||"general"};if(h.lang&&!params.get("lang")&&!localStorage.getItem(KEY))setLang(h.lang);
+  client={name:h.name||"",project:h.project||"general",open:!!h.open};if(h.lang&&!params.get("lang")&&!localStorage.getItem(KEY))setLang(h.lang);
   renderWelcome();
 })();
 </script>
