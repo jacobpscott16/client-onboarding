@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%2316130f%27/%3E%3Cpath d=%27M16 5l3.1 6.9 7.5.8-5.6 5 1.6 7.4L16 21.2l-6.6 3.9 1.6-7.4-5.6-5 7.5-.8z%27 fill=%27%23b8923a%27/%3E%3C/svg%3E">
+<title>Client Onboarding | Be Your Own Star</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7f2;--card:#fff;--ink:#16130f;--muted:#6b645a;--line:#e6dfd3;--gold:#b8923a;--gold-d:#8f6f26;--err:#b3261e;--ok:#2f6b3f}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12100d;--card:#1b1814;--ink:#f3eee6;--muted:#a79f92;--line:#322d25;--gold:#d3ad5b;--gold-d:#e2c27c;--err:#ff8a80;--ok:#7fcf92}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 80px}
+header{padding:28px 0 8px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font:600 26px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.02em}
+.brand span{color:var(--gold)}
+.lang button{background:none;border:1px solid var(--line);color:var(--muted);padding:6px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:13px}
+.lang button[aria-pressed=true]{border-color:var(--gold);color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;margin-top:18px}
+h1{font:600 34px/1.15 "Cormorant Garamond",Georgia,serif;margin:0 0 8px}
+h2{font:600 26px/1.2 "Cormorant Garamond",Georgia,serif;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 22px}
+.progress{display:flex;gap:6px;margin:18px 0 0}
+.progress i{flex:1;height:4px;border-radius:2px;background:var(--line)}
+.progress i.on{background:var(--gold)}
+.steplabel{color:var(--muted);font-size:13px;margin-top:8px}
+.field{margin:0 0 20px}
+label,.lbl{display:block;font-weight:500;margin-bottom:4px}
+.req{color:var(--gold-d)}
+.hint{color:var(--muted);font-size:14px;margin:0 0 6px}
+input[type=text],input[type=email],input[type=tel],input[type=url],input[type=date],textarea,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+textarea{min-height:104px;resize:vertical}
+input[type=date]{max-width:260px}
+input:focus,textarea:focus,select:focus,button:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.err{color:var(--err);font-size:14px;margin-top:4px;display:none}
+.field.bad .err{display:block}.field.bad input,.field.bad textarea,.field.bad select{border-color:var(--err)}
+.actions{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
+.btn{font:inherit;font-weight:600;border-radius:999px;padding:12px 26px;border:1px solid var(--gold);cursor:pointer;background:var(--gold);color:#fff}
+.btn:hover{background:var(--gold-d)}
+.btn.ghost{background:none;color:var(--ink);border-color:var(--line)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.drop{border:1.5px dashed var(--line);border-radius:12px;padding:18px;text-align:center;color:var(--muted);cursor:pointer}
+.drop:hover,.drop.over{border-color:var(--gold)}
+.file{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-top:8px;font-size:14px}
+.file .n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;width:90px}
+.bar b{display:block;height:100%;width:0;background:var(--gold)}
+.file button{background:none;border:0;color:var(--muted);cursor:pointer;font-size:18px}
+.note{background:var(--bg);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:10px 14px;font-size:14px;margin-top:10px}
+.sum section{border-top:1px solid var(--line);padding:14px 0}
+.sum h3{margin:0 0 6px;font-size:15px;display:flex;justify-content:space-between;align-items:center}
+.sum h3 button{background:none;border:0;color:var(--gold-d);cursor:pointer;font:inherit;font-size:14px;text-decoration:underline}
+.sum dl{margin:0;display:grid;grid-template-columns:minmax(120px,32%) 1fr;gap:6px 14px;font-size:14px}
+.sum dt{color:var(--muted)}.sum dd{margin:0;white-space:pre-wrap;word-break:break-word}
+.check{display:flex;gap:10px;align-items:flex-start;margin:14px 0}
+.check input{margin-top:5px;width:18px;height:18px;accent-color:var(--gold)}
+.aprow{margin:0 0 10px}.aplab{font-size:13px;color:var(--muted);margin-bottom:4px}
+.apgrid{display:grid;grid-template-columns:1fr 1fr 34px;gap:8px;align-items:center}
+.apgrid .rm{background:none;border:0;color:var(--muted);cursor:pointer;font-size:20px}
+.btn.small{padding:8px 18px;font-size:14px}.note a{color:var(--gold-d)}
+#frm .note{margin:0 0 20px}
+@media (max-width:560px){.apgrid{grid-template-columns:1fr 34px}.apgrid input[type=email]{grid-column:1}}
+.est{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:6px 0 20px}
+.est table{width:100%;border-collapse:collapse;margin-top:8px;font-size:15px}
+.est td{padding:5px 0;border-bottom:1px solid var(--line)}.est td:last-child{text-align:right;white-space:nowrap;padding-left:12px}
+.est .tot td{font-weight:600;border-bottom:0;padding-top:9px}
+.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+.banner{padding:12px 16px;border-radius:10px;margin-top:18px;border:1px solid var(--line);background:var(--card)}
+.banner.warn{border-color:var(--gold)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:16px;z-index:9}
+.modal.on{display:flex}.modal div{background:var(--card);border-radius:14px;padding:24px;max-width:440px}
+.done{text-align:center;padding:30px 8px}.done .tick{font-size:42px;color:var(--ok)}
+@media (max-width:560px){.card{padding:20px}h1{font-size:28px}.sum dl{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Be Your Own <span>Star</span></div>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="lEN" aria-pressed="true">EN</button> <button id="lDE" aria-pressed="false">DE</button>
+    </div>
+  </header>
+  <div id="app"></div>
+</div>
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div><p id="modalMsg"></p><p><a id="modalMail" class="btn" style="display:inline-block;text-decoration:none"></a> <button class="btn ghost" id="modalClose"></button></p></div></div>
+
+<script src="pricing.js"></script>
+<script>
+/* ============================ CONFIG (edit here) ============================ */
+const CONFIG = {
+  SCRIPT_URL: "",                       // Apps Script web app URL; empty = demo mode (nothing is sent or saved)
+  CONTACT_EMAIL: "jacobpscott16@gmail.com", // shown in the "send files directly" popup
+  MAX_FILE_MB: 200,                     // per file, enforced here and on the server
+  MAX_TOTAL_MB: 500,                    // per submission
+  MAX_FILES: 10,
+  MIN_SECONDS_BEFORE_SUBMIT: 20,        // bots submit faster than this
+  ALLOWED_EXT: ["mp3","wav","m4a","aif","aiff","flac","mp4","mov","pdf","doc","docx","txt","rtf","pages","png","jpg","jpeg","zip"]
+};
+/* ============================================================================ */
+
+const UI = {
+ en:{title:"Let's find your voice",welcome:"Thank you for choosing us. Your answers help us find the right people for you and your work, and they shape every email we write. It takes about 15 minutes. Write as much or as little as you like. You can leave and come back; your answers are saved in this browser.",
+  ready:"Helpful to have ready",start:"Start",next:"Next",back:"Back",review:"Review your answers",reviewSub:"Please check everything. You can change any section before sending.",edit:"Edit",
+  consent:"I agree that my answers and files are stored and used to prepare my outreach campaign, as described in the privacy notice above.",
+  privacy:"Privacy notice",privacyText:"We use your answers and files only to prepare and run your campaign. They are stored in a private Google Drive folder that only the team can open. We keep them until the project ends plus 12 months, then delete them. You can ask us to see, correct, or delete your data at any time by email.",
+  send:"Confirm and send",sending:"Sending…",required:"This field is required.",badEmail:"Please enter a valid email address.",
+  doneTitle:"Thank you, your answers are in.",doneText:"A copy is on its way to your inbox. We will review everything and come back to you with the next steps.",
+  files:"Files (optional)",filesHint:"Drop files here or click to choose.",filesLimit:(f,t,n)=>`Up to ${n} files, ${f} MB each, ${t} MB in total.`,
+  tooBig:(f)=>`“${f}” is over the size limit.`,tooMany:"You have reached the maximum number of files.",badType:(f)=>`“${f}” has a file type we cannot accept.`,totalBig:"The total size is over the limit.",
+  modalBig:"That file is larger than our upload limit. No problem: please email it to us directly and we will add it to your folder.",modalMail:"Email the file",close:"Close",
+  invalid:"This page needs the private link we sent you. Please open that link, or contact us if you cannot find it.",demo:"Preview mode: nothing is sent or saved.",
+  uploadFail:"A file could not be uploaded. You can try again, or email it to us directly.",submitFail:"Sorry, sending failed. Your answers are still here. Please try again, or email us.",
+  stepOf:(a,b)=>`Step ${a} of ${b}`,yes:"Yes",no:"No",choose:"Please choose",none:"(left blank)",mainApprover:"Main decision-maker",extraApprover:"Additional approver",approverName:"Name",approverEmail:"Email address",addApprover:"+ Add another approver",estTitle:"Your estimate",estEmpty:"Choose a bundle to see your estimate.",estTotal:"Estimated total",estPending:"We will recommend the best bundle and confirm its price",estMore:"more to be confirmed",estNote:"This is an estimate based on your choices. All prices are net; VAT is added where it applies. We will send you a final quote to approve before anything starts."},
+ de:{title:"Lassen Sie uns Ihre Stimme finden",welcome:"Vielen Dank, dass Sie sich für uns entschieden haben. Ihre Antworten helfen uns, die richtigen Menschen für Sie und Ihre Arbeit zu finden, und sie prägen jede E-Mail, die wir schreiben. Es dauert etwa 15 Minuten. Schreiben Sie so viel oder so wenig, wie Sie möchten. Sie können jederzeit unterbrechen; Ihre Antworten werden in diesem Browser gespeichert.",
+  ready:"Hilfreich zur Hand zu haben",start:"Los geht's",next:"Weiter",back:"Zurück",review:"Antworten prüfen",reviewSub:"Bitte prüfen Sie alles. Sie können jeden Abschnitt vor dem Senden noch ändern.",edit:"Ändern",
+  consent:"Ich bin einverstanden, dass meine Antworten und Dateien gespeichert und zur Vorbereitung meiner Outreach-Kampagne verwendet werden, wie in der Datenschutzerklärung oben beschrieben.",
+  privacy:"Datenschutz",privacyText:"Wir verwenden Ihre Antworten und Dateien ausschließlich, um Ihre Kampagne vorzubereiten und durchzuführen. Sie werden in einem privaten Google-Drive-Ordner gespeichert, den nur unser Team öffnen kann. Wir bewahren sie bis zum Projektende plus 12 Monate auf und löschen sie dann. Sie können jederzeit per E-Mail Auskunft, Berichtigung oder Löschung verlangen.",
+  send:"Bestätigen und senden",sending:"Wird gesendet…",required:"Dieses Feld ist erforderlich.",badEmail:"Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+  doneTitle:"Vielen Dank, Ihre Antworten sind bei uns.",doneText:"Eine Kopie ist unterwegs in Ihr Postfach. Wir prüfen alles und melden uns mit den nächsten Schritten.",
+  files:"Dateien (optional)",filesHint:"Dateien hierher ziehen oder klicken.",filesLimit:(f,t,n)=>`Bis zu ${n} Dateien, je ${f} MB, insgesamt ${t} MB.`,
+  tooBig:(f)=>`„${f}“ ist größer als erlaubt.`,tooMany:"Sie haben die maximale Anzahl an Dateien erreicht.",badType:(f)=>`„${f}“ hat ein Dateiformat, das wir nicht annehmen können.`,totalBig:"Die Gesamtgröße liegt über dem Limit.",
+  modalBig:"Diese Datei ist größer als unser Upload-Limit. Kein Problem: Bitte schicken Sie sie uns direkt per E-Mail, wir legen sie in Ihrem Ordner ab.",modalMail:"Datei per E-Mail senden",close:"Schließen",
+  invalid:"Diese Seite benötigt den privaten Link, den wir Ihnen geschickt haben. Bitte öffnen Sie diesen Link oder melden Sie sich bei uns.",demo:"Vorschau-Modus: Es wird nichts gesendet oder gespeichert.",
+  uploadFail:"Eine Datei konnte nicht hochgeladen werden. Versuchen Sie es erneut oder senden Sie sie uns direkt per E-Mail.",submitFail:"Das Senden ist leider fehlgeschlagen. Ihre Antworten sind noch hier. Bitte versuchen Sie es erneut oder schreiben Sie uns.",
+  stepOf:(a,b)=>`Schritt ${a} von ${b}`,yes:"Ja",no:"Nein",choose:"Bitte wählen",none:"(leer)",mainApprover:"Hauptentscheidung",extraApprover:"Weitere freigebende Person",approverName:"Name",approverEmail:"E-Mail-Adresse",addApprover:"+ Weitere Person hinzufügen",estTitle:"Ihre Schätzung",estEmpty:"Wählen Sie ein Paket, um Ihre Schätzung zu sehen.",estTotal:"Geschätzte Gesamtsumme",estPending:"Wir empfehlen das passende Paket und bestätigen den Preis",estMore:"weitere Posten werden bestätigt",estNote:"Dies ist eine Schätzung auf Basis Ihrer Angaben. Vor dem Start senden wir Ihnen ein endgültiges Angebot zur Freigabe. Alle Preise sind Nettopreise; die Mehrwertsteuer kommt hinzu, wo sie anfällt."}
+};
+
+/* Questionnaires are data. Shared sections are reused by every project type; modules are project specific.
+   Rule for `req`: a field is required only when a campaign cannot start without it. Shared sections require
+   almost nothing; each project lists the extra fields it needs in PROJECTS[...].required. */
+/* T, PRICING, money and bLabel come from pricing.js (single source of truth for prices). */
+const routeOf=a=>!a.list_choice?"":a.list_choice.startsWith("Yes")?"own":"build";
+const bundleOpts=a=>{const r=routeOf(a),list=PRICING.bundles.filter(b=>!r||b.route===r);
+  return {en:[...list.map(b=>bLabel(b,"en")),PRICING.best.en],de:[...list.map(b=>bLabel(b,"de")),PRICING.best.de]}};
+const own=a=>routeOf(a)==="own", build=a=>routeOf(a)==="build", meMode=a=>a.approver_mode==="Me", other=a=>a.approver_mode==="Someone else", yes=a=>a.deadline_has==="Yes";
+const SEC={
+ about:{id:"about",t:T("About you","Über Sie"),f:[
+  {id:"name",type:"text",req:1,l:T("Your name, or your artist or project name","Ihr Name bzw. Künstler- oder Projektname")},
+  {id:"company",type:"text",l:T("Company or label, if any","Firma oder Label, falls vorhanden")},
+  {id:"email",type:"email",req:1,l:T("Email","E-Mail")},
+  {id:"phone",type:"tel",l:T("Phone number","Telefonnummer")}]},
+ goal:{id:"goal",t:T("Your goal","Ihr Ziel"),f:[
+  {id:"goal",type:"area",req:1,l:T("The goal of this outreach is…","Das Ziel dieser Kontaktaufnahme ist es, …"),
+   ph:T("to find a …   /   to book a …","… eine/n … zu finden   /   … einen … zu buchen"),
+   h:T("Finish the sentence in your own words. For example: “…to find a featured vocalist for my next single”, “…to book a venue for my spring tour”, or “…to get my podcast in front of more listeners”.","Vervollständigen Sie den Satz in Ihren eigenen Worten. Zum Beispiel: „… eine Gastsängerin für meine nächste Single zu finden“, „… einen Veranstaltungsort für meine Frühjahrstour zu buchen“ oder „… meinen Podcast mehr Hörern vorzustellen“.")},
+  {id:"result4w",type:"area",l:T("What would a perfect result look like after 4 weeks of outreach?","Wie sähe nach 4 Wochen Kontaktaufnahme ein perfektes Ergebnis aus?"),
+   h:T("Be specific. For example: how many replies, calls, bookings, collaborations, or introductions you would count as a success.","Bitte seien Sie konkret. Zum Beispiel: wie viele Antworten, Gespräche, Buchungen, Kooperationen oder Kontakte für Sie ein Erfolg wären.")},
+  {id:"deadline_has",type:"select",rr:1,l:T("Is there a deadline or date we should work toward?","Gibt es einen Termin oder ein Datum, auf das wir hinarbeiten sollen?"),o:T(["Yes","No"],["Ja","Nein"])},
+  {id:"deadline_date",type:"date",req:1,show:yes,l:T("Which date?","Welches Datum?")},
+  {id:"deadline_note",type:"text",show:yes,l:T("Anything we should know about the timing? (optional)","Gibt es etwas zum Zeitplan, das wir wissen sollten? (optional)")},
+  {id:"offer",type:"area",l:T("What can you offer the people we contact?","Was können Sie den Personen anbieten, die wir kontaktieren?"),
+   h:T("Think of what is in it for them. For example: a session fee, a revenue share, a co-writing credit, a performance fee, a ticket split, travel and accommodation, exposure to your audience, or a release on your label. If you have not decided yet, write “not sure” and we will suggest options.","Überlegen Sie, was für die andere Seite dabei herausspringt. Zum Beispiel: ein Session-Honorar, eine Umsatzbeteiligung, ein Co-Writing-Credit, eine Auftrittsgage, eine Ticketbeteiligung, Reise und Unterkunft, Reichweite bei Ihrem Publikum oder eine Veröffentlichung auf Ihrem Label. Wenn Sie sich noch nicht entschieden haben, schreiben Sie „unsicher“, dann schlagen wir Optionen vor.")}]},
+ singer:{id:"singer",t:T("Your ideal singer","Ihre ideale Stimme"),f:[
+  {id:"ideal",type:"area",l:T("Describe your ideal singer in a few sentences","Beschreiben Sie Ihre ideale Sängerin bzw. Ihren idealen Sänger in wenigen Sätzen"),h:T("Example: “Female soul or R&B vocalist, 25 to 40, based in Germany or Austria, sings in English, has released original music.”","Beispiel: „Soul- oder R&B-Sängerin, 25 bis 40, in Deutschland oder Österreich, singt auf Englisch, hat eigene Musik veröffentlicht.“")},
+  {id:"genre",type:"text",l:T("Genre and style","Genre und Stil")},
+  {id:"voice",type:"text",l:T("Voice type or range, if it matters","Stimmtyp oder Stimmumfang, falls wichtig")},
+  {id:"singlang",type:"text",l:T("Language or languages the singer should sing in","Sprache(n), in denen die Sängerin bzw. der Sänger singen soll")},
+  {id:"location",type:"text",l:T("Where should the singer be based? Or is remote recording fine?","Wo soll die Sängerin bzw. der Sänger leben? Oder ist Remote-Aufnahme in Ordnung?")},
+  {id:"experience",type:"area",l:T("What experience should the singer have?","Welche Erfahrung sollte die Sängerin bzw. der Sänger mitbringen?"),h:T("For example: released music, live shows, studio work, or a social media following.","Zum Beispiel: Veröffentlichungen, Live-Auftritte, Studioarbeit oder Social-Media-Reichweite.")},
+  {id:"rules",type:"area",l:T("What must be true, and what would rule a singer out?","Was muss zutreffen, und was würde eine Sängerin bzw. einen Sänger ausschließen?"),h:T("Your must-haves and deal-breakers, all in one place.","Ihre Muss- und Ausschlusskriterien an einem Ort.")},
+  {id:"similar",type:"area",l:T("Two or three singers whose voice or style is close to what you want, with links","Zwei oder drei Sänger/innen, deren Stimme oder Stil dem Gewünschten nahekommt, mit Links")}]},
+ audience:{id:"audience",t:T("Who you want to reach","Wen Sie erreichen möchten"),f:[
+  {id:"ideal",type:"area",l:T("Describe the people or organizations you want to reach","Beschreiben Sie die Menschen oder Organisationen, die Sie erreichen möchten"),h:T("For example: “independent venues with 200 to 800 seats in Bavaria that book singer-songwriters”, or “podcast hosts who interview musicians”.","Zum Beispiel: „unabhängige Veranstaltungsorte mit 200 bis 800 Plätzen in Bayern, die Singer-Songwriter buchen“ oder „Podcast-Hosts, die Musiker interviewen“.")},
+  {id:"location",type:"text",l:T("Where should they be? A region, a country, or anywhere","Wo sollen sie sein? Eine Region, ein Land oder überall")},
+  {id:"rules",type:"area",l:T("What must be true, and what would rule someone out?","Was muss zutreffen, und was würde jemanden ausschließen?"),h:T("Your must-haves and deal-breakers, all in one place.","Ihre Muss- und Ausschlusskriterien an einem Ort.")},
+  {id:"similar",type:"area",l:T("Two or three examples of a perfect fit, with links","Zwei oder drei Beispiele für einen perfekten Treffer, mit Links")}]},
+ project:{id:"project",t:T("What the singer will join","Wobei die Stimme mitwirkt"),intro:T("Tell us about the song, release, or show the singer would be part of.","Erzählen Sie uns von dem Song, der Veröffentlichung oder der Show, bei der die Stimme mitwirken soll."),f:[
+  {id:"demo",type:"url",l:T("Link to the demo or recording the singer would work on","Link zum Demo oder zur Aufnahme, an der die Stimme arbeiten würde"),h:T("A streaming or private link. You can also upload the file in the next step.","Ein Streaming- oder privater Link. Sie können die Datei auch im nächsten Schritt hochladen.")},
+  {id:"story",type:"area",l:T("The story behind this project, in a few sentences","Die Geschichte hinter diesem Projekt, in wenigen Sätzen"),h:T("This often makes the best opening for our emails.","Das ergibt oft den besten Einstieg für unsere E-Mails.")},
+  {id:"lyrics",type:"area",l:T("Lyrics or a lead sheet, if there is one (paste or link)","Songtext oder Leadsheet, falls vorhanden (einfügen oder Link)")}]},
+ work:{id:"work",t:T("Your work and materials","Ihre Arbeit und Materialien"),intro:T("Where can we find your work most easily? Add the places that show you or your project at its best. If you have a lot online, your main profile page is perfect.","Wo finden wir Ihre Arbeit am einfachsten? Tragen Sie die Orte ein, an denen Sie oder Ihr Projekt am besten zur Geltung kommen. Wenn Sie viel online haben, ist Ihre Hauptprofilseite ideal."),f:[
+  {id:"spotify",type:"url",l:T("Spotify","Spotify"),ph:T("Link to your artist or release page","Link zu Ihrer Künstler- oder Veröffentlichungsseite")},
+  {id:"apple",type:"url",l:T("Apple Music","Apple Music"),ph:T("Link to your artist or release page","Link zu Ihrer Künstler- oder Veröffentlichungsseite")},
+  {id:"youtube",type:"url",l:T("YouTube","YouTube")},
+  {id:"soundcloud",type:"url",l:T("SoundCloud","SoundCloud")},
+  {id:"website",type:"url",l:T("Website","Website")},
+  {id:"social",type:"area",l:T("Social media links","Social-Media-Links"),h:T("Instagram, TikTok, Facebook… one link per line.","Instagram, TikTok, Facebook … ein Link pro Zeile.")},
+  {id:"other_links",type:"area",l:T("Anything else worth seeing","Sonst noch etwas Sehenswertes"),h:T("Press kit or EPK, articles, videos, past shows. One link per line.","Pressekit bzw. EPK, Artikel, Videos, frühere Shows. Ein Link pro Zeile.")},
+  {id:"background",type:"area",l:T("Is there anything about you or your project that would make a good opening for an email?","Gibt es etwas über Sie oder Ihr Projekt, das einen guten Einstieg für eine E-Mail ergibt?")},
+  {id:"files",type:"files",l:T("Marketing materials (optional)","Marketing-Materialien (optional)"),h:T("Upload anything you would like us to use in your outreach emails, for example photos, a one-sheet or press kit, a short demo, or a logo. Depending on the material, we add it to the emails as an attachment or a link.","Laden Sie alles hoch, was wir in Ihren E-Mails verwenden dürfen, zum Beispiel Fotos, ein One-Sheet bzw. Pressekit, ein kurzes Demo oder ein Logo. Je nach Material fügen wir es den E-Mails als Anhang oder Link hinzu.")},
+  {id:"assembly_note",type:"note",t:T("We will assemble your materials in the way we find works best, following marketing guidelines and best practices. If you have a specific vision for the campaign, you are always welcome to send us a personal email at {EMAIL} and we will take it into account.","Wir stellen Ihre Materialien so zusammen, wie es nach Marketing-Richtlinien und bewährten Methoden am besten funktioniert. Wenn Sie eine konkrete Vorstellung von der Kampagne haben, schreiben Sie uns jederzeit gern persönlich an {EMAIL}; wir berücksichtigen das.")},
+  {id:"anything",type:"area",l:T("Anything else we should know","Gibt es sonst noch etwas, das wir wissen sollten")}]},
+ package:{id:"package",t:T("Your package","Ihr Paket"),intro:T("Choose how you would like to work with us. You will see an estimate below as you choose.","Wählen Sie, wie wir zusammenarbeiten sollen. Unten sehen Sie beim Auswählen eine Schätzung."),f:[
+  {id:"pkg_note",type:"note",show:a=>!!a._pkgApplied,t:T("We filled this in from the package you built on the proposal page. You can still change anything.","Wir haben dies aus dem Paket übernommen, das Sie auf der Angebotsseite zusammengestellt haben. Sie können alles noch ändern.")},
+  {id:"list_choice",type:"select",req:1,rr:1,reset:["bundle","areas"],l:T("Do you already have a list of people to contact?","Haben Sie bereits eine Liste von Personen, die kontaktiert werden sollen?"),
+   o:T(["Yes, I will provide my own contact list","No, please build a custom, targeted contact list for me"],["Ja, ich stelle meine eigene Kontaktliste bereit","Nein, bitte erstellen Sie mir eine maßgeschneiderte, gezielte Kontaktliste"])},
+  {id:"list_where",type:"area",show:own,l:T("Where is your list?","Wo finden wir Ihre Liste?"),h:T("Paste a link, or upload the file in the previous step.","Fügen Sie einen Link ein oder laden Sie die Datei im vorherigen Schritt hoch.")},
+  {id:"bundle",type:"select",req:1,rr:1,l:T("Which bundle would you like?","Welches Paket möchten Sie?"),h:T("Prices are one-time for the whole project. Not sure? Choose the last option and we will pick the best fit.","Die Preise gelten einmalig für das gesamte Projekt. Unsicher? Wählen Sie die letzte Option, dann wählen wir das passende Paket."),o:bundleOpts},
+  {id:"followup",type:"select",rr:1,l:T("Would you like a follow-up email after 7 days?","Möchten Sie eine Erinnerungs-E-Mail nach 7 Tagen?"),o:T([`Yes (+${money(PRICING.followup)}, once per project)`,"No"],[`Ja (+${money(PRICING.followup)}, einmal pro Projekt)`,"Nein"])},
+  {id:"areas",type:"select",rr:1,show:build,l:T("How many additional search areas do you need?","Wie viele zusätzliche Suchbereiche brauchen Sie?"),h:T(`A search area is a clearly different region, genre, or target group. Your main search is included. Each additional area costs ${money(PRICING.area)} (one-time).`,`Ein Suchbereich ist eine klar andere Region, ein anderes Genre oder eine andere Zielgruppe. Ihre Hauptsuche ist inklusive. Jeder zusätzliche Bereich kostet ${money(PRICING.area)} (einmalig).`),o:T(["None","1","2","3 or more"],["Keine","1","2","3 oder mehr"])},
+  {id:"languages",type:"text",req:1,l:T("Which language or languages should the emails be in?","In welcher Sprache bzw. welchen Sprachen sollen die E-Mails verfasst werden?")},
+  {id:"lang_count",type:"select",req:1,rr:1,l:T("How many languages in total?","Wie viele Sprachen insgesamt?"),o:T(["1 (included)","2","3","4 or more"],["1 (inklusive)","2","3","4 oder mehr"])},
+  {id:"lang_note",type:"note",t:T(`One language is included. Each additional language costs ${money(PRICING.language)} (one-time).`,`Eine Sprache ist inklusive. Jede weitere Sprache kostet ${money(PRICING.language)} (einmalig).`)},
+  {id:"first_project",type:"select",rr:1,l:T("Is this your first project with us?","Ist dies Ihr erstes Projekt mit uns?"),h:T("Repeat projects have a reduced set-up fee.","Folgeprojekte haben eine reduzierte Einrichtungsgebühr."),o:T(["Yes, our first project","No, we have worked together before"],["Ja, unser erstes Projekt","Nein, wir haben schon zusammengearbeitet"])},
+  {id:"estimate",type:"estimate"}]},
+ prefs:{id:"prefs",t:T("Outreach preferences","Ihre Wünsche zur Kontaktaufnahme"),f:[
+  {id:"exclude",type:"area",l:T("Are there any contacts we should avoid?","Gibt es Kontakte, die wir meiden sollen?"),h:T("Describe them here: names, companies, or types of contacts.","Beschreiben Sie sie hier: Namen, Firmen oder Arten von Kontakten.")},
+  {id:"approver_mode",type:"select",req:1,rr:1,l:T("Who approves the email text and the test batch?","Wer gibt den E-Mail-Text und die Testsendung frei?"),o:T(["Me","Someone else"],["Ich","Jemand anderes"])},
+  {id:"me_note",type:"note",show:meMode,t:T("We will use the email address you gave earlier ({CLIENT_EMAIL}) as the main contact for this project.","Wir verwenden die E-Mail-Adresse, die Sie zuvor angegeben haben ({CLIENT_EMAIL}), als Hauptkontakt für dieses Projekt.")},
+  {id:"approvers",type:"approvers",show:other,l:T("Approvers","Freigebende Personen"),h:T("The first person is the main decision-maker. You can add more people.","Die erste Person trifft die Hauptentscheidung. Sie können weitere Personen hinzufügen.")}]}
+};
+const PREPARE={"general":T(
+ ["Links to where your work lives online (website, social media, streaming)","A short description of who you want to reach","What you can offer the people we contact","Whether you have your own contact list, or want us to build one","Any deadline you are working toward, and who should approve the emails (with their email address)"],
+ ["Links dazu, wo Ihre Arbeit online zu finden ist (Website, Social Media, Streaming)","Eine kurze Beschreibung, wen Sie erreichen möchten","Was Sie den Personen anbieten können, die wir kontaktieren","Ob Sie eine eigene Kontaktliste haben oder wir eine erstellen sollen","Einen Termin, auf den Sie hinarbeiten, und wer die E-Mails freigibt (mit E-Mail-Adresse)"]),
+ "singer-search":T(
+ ["Links to where your work lives online (Spotify, Apple Music, YouTube, your website)","The demo or recording the singer would work on","What you can offer the singer (a session fee, a revenue share, a credit, a release)","Whether you have your own contact list, or want us to build one","Any deadline you are working toward, and who should approve the emails (with their email address)"],
+ ["Links dazu, wo Ihre Arbeit online zu finden ist (Spotify, Apple Music, YouTube, Ihre Website)","Das Demo oder die Aufnahme, an der die Stimme arbeiten würde","Was Sie der Sängerin bzw. dem Sänger anbieten können (Honorar, Umsatzbeteiligung, Credit, Veröffentlichung)","Ob Sie eine eigene Kontaktliste haben oder wir eine erstellen sollen","Einen Termin, auf den Sie hinarbeiten, und wer die E-Mails freigibt (mit E-Mail-Adresse)"])};
+/* A project = its sections, the extra fields it cannot start without, and its welcome title. */
+const PROJECTS={"general":{sections:["about","goal","audience","work","package","prefs"],required:["ideal"],title:T("Tell us about your project","Erzählen Sie uns von Ihrem Projekt")},
+ "singer-search":{sections:["about","goal","singer","project","work","package","prefs"],required:["offer","ideal","demo"],title:T("Let's find your voice","Lassen Sie uns Ihre Stimme finden")}};
+const Q={};for(const [k,pr] of Object.entries(PROJECTS))Q[k]=pr.sections.map(id=>({...SEC[id],f:SEC[id].f.map(f=>pr.required.includes(f.id)?{...f,req:1}:f)}));
+
+/* ------------------------------- state & utils ------------------------------ */
+const $ = (s,r=document)=>r.querySelector(s);
+const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const params = new URLSearchParams(location.search);
+const TOKEN = params.get("c")||"";
+const DEMO = !CONFIG.SCRIPT_URL;
+let lang = (params.get("lang")||navigator.language||"en").toLowerCase().startsWith("de")?"de":"en";
+let client = null, step = 0, answers = {}, files = [], started = Date.now(), sending = false;
+const KEY = "onboard:"+(TOKEN||"demo");
+const t = k=>UI[lang][k];
+const loadSaved=()=>{try{const s=JSON.parse(localStorage.getItem(KEY)||"{}");answers=s.answers||{};if(s.lang)lang=s.lang;}catch(e){}};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify({answers,lang}))}catch(e){}};
+const clearSaved=()=>{try{localStorage.removeItem(KEY)}catch(e){}};
+const mb=n=>Math.round(n/1048576*10)/10;
+const ext=n=>(n.split(".").pop()||"").toLowerCase();
+
+async function api(body){
+  if(DEMO){await new Promise(r=>setTimeout(r,500));return {ok:true,demo:true}}
+  const r=await fetch(CONFIG.SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({token:TOKEN,...body})});
+  return r.json();
+}
+async function hello(){
+  if(DEMO)return {ok:true,name:params.get("name")||"Alex",lang,project:PROJECTS[params.get("p")]?params.get("p"):"general"};
+  if(!TOKEN)return {ok:false};
+  try{const r=await fetch(CONFIG.SCRIPT_URL+"?action=hello&t="+encodeURIComponent(TOKEN));return await r.json();}catch(e){return {ok:false}}
+}
+
+/* --------------------------------- rendering -------------------------------- */
+function shell(inner,stepIdx,total,keep){
+  const bars=total?`<div class="progress" aria-hidden="true">${Array.from({length:total},(_,i)=>`<i class="${i<=stepIdx?"on":""}"></i>`).join("")}</div><div class="steplabel">${t("stepOf")(stepIdx+1,total)}</div>`:"";
+  $("#app").innerHTML=(DEMO?`<div class="banner warn">${t("demo")}</div>`:"")+bars+`<div class="card">${inner}</div>`;
+  if(!keep)window.scrollTo({top:0,behavior:"smooth"});
+}
+const vis=f=>!f.show||f.show(answers);
+const EMAILRE=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+function noteHtml(f){
+  const mail=`<a href="mailto:${esc(CONFIG.CONTACT_EMAIL)}">${esc(CONFIG.CONTACT_EMAIL)}</a>`;
+  const mine=esc((answers.email||"").trim()||(lang==="de"?"die oben genannte Adresse":"the address above"));
+  return `<div class="note" data-field="${f.id}">${esc(f.t[lang]).replace("{EMAIL}",mail).replace("{CLIENT_EMAIL}",`<b>${mine}</b>`)}</div>`;
+}
+const optsOf=f=>typeof f.o==="function"?f.o(answers):f.o;
+/* ---- live price estimate (indicative; we confirm the final quote) ---- */
+function estimate(lg){
+  const A=answers,lines=[];let total=0,pending=false;
+  const b=PRICING.bundles.find(x=>bLabel(x,"en")===A.bundle);
+  if(b){lines.push([b[lg],b.price]);total+=b.price;
+    if((A.first_project||"").startsWith("No")){lines.push([lg==="de"?"Folgeprojekt: reduzierte Einrichtung":"Repeat project: reduced set-up",-b.refresh]);total-=b.refresh}}
+  else if(A.bundle)pending=true;
+  if((A.followup||"").startsWith("Yes")){lines.push([lg==="de"?"Erinnerungs-E-Mail nach 7 Tagen":"7-day follow-up email",PRICING.followup]);total+=PRICING.followup}
+  const n=parseInt(A.lang_count||"1",10)||1;
+  if(n>1){lines.push([lg==="de"?`${n-1} zusätzliche Sprache(n)`:`${n-1} additional language${n-1>1?"s":""}`,(n-1)*PRICING.language]);total+=(n-1)*PRICING.language}
+  const ar=routeOf(A)==="build"?(parseInt(A.areas||"0",10)||0):0;
+  if(ar>0){lines.push([lg==="de"?`${ar} zusätzliche(r) Suchbereich(e)`:`${ar} additional search area${ar>1?"s":""}`,ar*PRICING.area]);total+=ar*PRICING.area}
+  const more=/or more|mehr/.test((A.lang_count||"")+" "+(A.areas||""));
+  return {lines,total,pending,more};
+}
+function estimateHtml(){
+  const e=estimate(lang);
+  if(!e.lines.length&&!e.pending)return `<div class="est"><b>${t("estTitle")}</b><p class="hint" style="margin:6px 0 0">${t("estEmpty")}</p></div>`;
+  const rows=e.lines.map(([l,a])=>`<tr><td>${esc(l)}</td><td>${a<0?"−":""}${money(Math.abs(a))}</td></tr>`).join("");
+  const total=e.pending?`<tr class="tot"><td>${t("estPending")}</td><td>${e.lines.length?"+ "+money(e.total):""}</td></tr>`:`<tr class="tot"><td>${t("estTotal")}${e.more?" ("+t("estMore")+")":""}</td><td>${money(e.total)}</td></tr>`;
+  return `<div class="est"><b>${t("estTitle")}</b><table>${rows}${total}</table><p class="hint" style="margin:8px 0 0">${t("estNote")}</p></div>`;
+}
+function estimateText(){
+  const e=estimate("en");const L=e.lines.map(([l,a])=>`${l}: ${a<0?"-":""}${money(Math.abs(a))}`);
+  L.push(e.pending?"Bundle: client asked us to pick the best bundle. Quote to be confirmed.":`Estimated total: ${money(e.total)}${e.more?" (more languages or areas to be confirmed)":""}`);
+  return L.join("\n");
+}
+function fieldHtml(f){
+  if(!vis(f))return "";
+  if(f.type==="note")return noteHtml(f);
+  if(f.type==="estimate")return estimateHtml();
+  if(f.type==="files")return filesHtml(f);
+  if(f.type==="approvers")return approversHtml(f);
+  const v=answers[f.id]??"";
+  const label=f.l?`<label for="f_${f.id}">${esc(f.l[lang])}${f.req?' <span class="req">*</span>':""}</label>`:"";
+  const hint=f.h?`<p class="hint">${esc(f.h[lang])}</p>`:"";
+  const ph=f.ph?` placeholder="${esc(f.ph[lang])}"`:"";
+  let ctl="";
+  if(f.type==="area")ctl=`<textarea id="f_${f.id}" data-id="${f.id}" maxlength="5000"${ph}>${esc(v)}</textarea>`;
+  else if(f.type==="select")ctl=`<select id="f_${f.id}" data-id="${f.id}"><option value="">${t("choose")}</option>${(o=>o[lang].map((x,i)=>`<option value="${esc(o.en[i])}" ${v===o.en[i]?"selected":""}>${esc(x)}</option>`).join(""))(optsOf(f))}</select>`;
+  else if(f.type==="date")ctl=`<input id="f_${f.id}" data-id="${f.id}" type="date" min="${new Date().toISOString().slice(0,10)}" value="${esc(v)}">`;
+  else ctl=`<input id="f_${f.id}" data-id="${f.id}" type="${f.type==="url"?"text":f.type}" ${f.type==="url"?'inputmode="url"':""} maxlength="500" value="${esc(v)}"${ph} autocomplete="${f.id==="email"?"email":f.id==="name"?"name":f.id==="phone"?"tel":"off"}">`;
+  return `<div class="field" data-field="${f.id}">${label}${hint}${ctl}<div class="err"></div></div>`;
+}
+function approversHtml(f){
+  const list=answers.approvers&&answers.approvers.length?answers.approvers:(answers.approvers=[{name:"",email:""}]);
+  return `<div class="field" data-field="approvers"><span class="lbl">${esc(f.l[lang])} <span class="req">*</span></span>${f.h?`<p class="hint">${esc(f.h[lang])}</p>`:""}
+  ${list.map((a,i)=>`<div class="aprow"><div class="aplab">${i===0?t("mainApprover"):t("extraApprover")}</div><div class="apgrid">
+   <input type="text" data-apf="name" data-api="${i}" placeholder="${t("approverName")}" aria-label="${t("approverName")}" value="${esc(a.name)}" maxlength="120" autocomplete="off">
+   <input type="email" data-apf="email" data-api="${i}" placeholder="${t("approverEmail")}" aria-label="${t("approverEmail")}" value="${esc(a.email)}" maxlength="200" autocomplete="off">
+   ${i?`<button type="button" class="rm" data-aprm="${i}" aria-label="remove">×</button>`:'<span></span>'}</div></div>`).join("")}
+  ${list.length<4?`<button type="button" class="btn ghost small" id="apadd">${t("addApprover")}</button>`:""}<div class="err"></div></div>`;
+}
+function filesHtml(f){
+  return `<div class="field"><span class="lbl">${esc(f.l[lang])}</span><p class="hint">${esc(f.h[lang])}</p><p class="hint">${t("filesLimit")(CONFIG.MAX_FILE_MB,CONFIG.MAX_TOTAL_MB,CONFIG.MAX_FILES)}</p>
+  <div class="drop" id="drop" tabindex="0" role="button">${t("filesHint")}</div><input id="pick" type="file" multiple hidden accept="${CONFIG.ALLOWED_EXT.map(e=>"."+e).join(",")}">
+  <div id="flist">${files.map(fileRow).join("")}</div><div class="err" id="ferr"></div></div>`;
+}
+
+function fileRow(f,i){return `<div class="file" data-i="${i}"><span class="n">${esc(f.file.name)} · ${mb(f.file.size)} MB</span><span class="bar"><b style="width:${f.pct||0}%"></b></span><button type="button" aria-label="remove" data-rm="${i}">×</button></div>`}
+
+function renderWelcome(){
+  shell(`<h1>${(PROJECTS[client.project].title||T("Tell us about your project","Erzählen Sie uns von Ihrem Projekt"))[lang]}</h1>${client.name?`<p class="sub" style="margin-bottom:6px;color:var(--ink)">${lang==="de"?"Hallo":"Hi"} ${esc(client.name)},</p>`:""}<p class="sub">${t("welcome")}</p>
+  ${PREPARE[client.project]?`<div class="note"><b>${t("ready")}</b><ul style="margin:6px 0 0;padding-left:20px">${PREPARE[client.project][lang].map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}
+  <div class="actions"><span></span><button class="btn" id="go">${t("start")}</button></div>`,0,0);
+  $("#go").onclick=()=>renderStep(0);
+}
+function renderStep(i,keep,focusId){
+  step=i;const sec=Q[client.project][i],n=Q[client.project].length;
+  shell(`<h2>${esc(sec.t[lang])}</h2><p class="sub">${sec.intro?esc(sec.intro[lang]):""}</p><form id="frm" novalidate>${sec.f.map(fieldHtml).join("")}</form>
+  <div class="actions"><button class="btn ghost" id="bk">${t("back")}</button><button class="btn" id="nx">${t("next")}</button></div>`,i,n+1,keep);
+  if(focusId)$("#f_"+focusId)?.focus({preventScroll:true});
+  const frm=$("#frm");
+  frm.addEventListener("input",e=>{
+    const d=e.target.dataset;
+    if(d.apf){answers.approvers[+d.api][d.apf]=e.target.value;save();return}
+    if(d.id){answers[d.id]=e.target.value;save();
+      const f=sec.f.find(x=>x.id===d.id);if(f&&f.reset)f.reset.forEach(k=>delete answers[k]);if(f&&f.rr)renderStep(i,true,d.id)}   // show or hide dependent questions
+  });
+  frm.addEventListener("click",e=>{
+    if(e.target.id==="apadd"){answers.approvers.push({name:"",email:""});save();renderStep(i,true)}
+    if(e.target.dataset.aprm){answers.approvers.splice(+e.target.dataset.aprm,1);save();renderStep(i,true)}
+  });
+  // Enter in a text field must act like "Next", never reload the page (which dropped people back at the start).
+  frm.addEventListener("submit",e=>{e.preventDefault();$("#nx").click()});
+  $("#bk").onclick=()=>i?renderStep(i-1):renderWelcome();
+  $("#nx").onclick=()=>{if(validate(sec))(i+1<n)?renderStep(i+1):renderReview()};
+  wireFiles();
+}
+function approversError(){
+  const rows=(answers.approvers||[]).map(a=>({name:(a.name||"").trim(),email:(a.email||"").trim()}));
+  const [first,...rest]=rows;
+  if(!first||!first.name||!first.email)return {msg:t("required")};
+  if(!EMAILRE.test(first.email))return {msg:t("badEmail")};
+  const extra=rest.filter(a=>a.name||a.email);
+  for(const a of extra){if(!a.name||!a.email)return {msg:t("required")};if(!EMAILRE.test(a.email))return {msg:t("badEmail")}}
+  return {clean:[first,...extra]};
+}
+function validate(sec){
+  let ok=true;
+  for(const f of sec.f){if(!vis(f)||f.type==="files"||f.type==="note"||f.type==="estimate")continue;
+    const el=$(`[data-field="${f.id}"]`);if(!el)continue;let msg="";
+    if(f.type==="approvers"){const r=approversError();if(r.clean)answers.approvers=r.clean;else msg=r.msg}
+    else{const v=(answers[f.id]||"").trim();
+      if(f.req&&!v)msg=t("required");else if(f.type==="email"&&v&&!EMAILRE.test(v))msg=t("badEmail");
+      else if(f.type==="date"&&v&&!/^\d{4}-\d{2}-\d{2}$/.test(v))msg=t("required");}
+    el.classList.toggle("bad",!!msg);$(".err",el).textContent=msg;if(msg)ok=false;}
+  if(!ok)$(".bad input,.bad textarea,.bad select")?.focus();
+  return ok;
+}
+
+function wireFiles(){
+  const drop=$("#drop");if(!drop)return;const pick=$("#pick");
+  drop.onclick=()=>pick.click();drop.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick.click()}};
+  ["dragover","dragenter"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
+  ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over")}));
+  drop.addEventListener("drop",e=>addFiles(e.dataTransfer.files));pick.onchange=()=>{addFiles(pick.files);pick.value=""};
+  $("#flist").onclick=e=>{const i=e.target.dataset.rm;if(i!==undefined){files.splice(+i,1);$("#flist").innerHTML=files.map(fileRow).join("")}};
+}
+function bigFileModal(){
+  $("#modalMsg").textContent=t("modalBig");const a=$("#modalMail");a.textContent=t("modalMail");
+  a.href="mailto:"+CONFIG.CONTACT_EMAIL+"?subject="+encodeURIComponent("Files for my onboarding");$("#modalClose").textContent=t("close");$("#modal").classList.add("on");
+}
+$("#modalClose").onclick=()=>$("#modal").classList.remove("on");
+function addFiles(list){
+  const err=$("#ferr");err.textContent="";
+  for(const f of list){
+    if(files.length>=CONFIG.MAX_FILES){err.textContent=t("tooMany");break}
+    if(!CONFIG.ALLOWED_EXT.includes(ext(f.name))){err.textContent=t("badType")(f.name);continue}
+    if(f.size>CONFIG.MAX_FILE_MB*1048576){err.textContent=t("tooBig")(f.name);bigFileModal();continue}
+    if(files.reduce((s,x)=>s+x.file.size,0)+f.size>CONFIG.MAX_TOTAL_MB*1048576){err.textContent=t("totalBig");bigFileModal();continue}
+    files.push({file:f,pct:0});
+  }
+  $("#flist").innerHTML=files.map(fileRow).join("");
+}
+
+function fmtDate(v,lg){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v);if(!m||lg==="en")return v;return `${+m[3]}.${+m[2]}.${m[1]}`}
+function display(f,lg){
+  const raw=answers[f.id]||"";
+  if(f.type==="approvers")return (answers.approvers||[]).filter(a=>a.name||a.email).map((a,i)=>`${i+1}. ${a.name} <${a.email}>${i===0?(lg==="de"?" (Hauptentscheidung)":" (main decision-maker)"):""}`).join("\n");
+  if(f.type==="select"&&raw){const o=optsOf(f);return o[lg][o.en.indexOf(raw)]||raw}
+  if(f.type==="date")return fmtDate(raw,lg);
+  return raw;
+}
+function entries(sec,lg){return sec.f.filter(f=>vis(f)&&f.type!=="files"&&f.type!=="note"&&f.type!=="estimate").map(f=>({f,q:f.l[lg],a:display(f,lg)}))}
+function renderReview(){
+  const secs=Q[client.project];
+  const body=secs.map((s,i)=>{
+    const rows=entries(s,lang).map(({q,a})=>`<dt>${esc(q)}</dt><dd>${a?esc(a):'<span style="color:var(--muted)">'+t("none")+"</span>"}</dd>`).join("");
+    const fl=s.f.some(f=>f.type==="files")&&files.length?`<dt>${esc(s.f.find(f=>f.type==="files").l[lang])}</dt><dd>${files.map(x=>esc(x.file.name)).join("\n")}</dd>`:"";
+    return `<section><h3>${esc(s.t[lang])}<button type="button" data-edit="${i}">${t("edit")}</button></h3><dl>${rows}${fl}</dl></section>`}).join("");
+  shell(`<h2>${t("review")}</h2><p class="sub">${t("reviewSub")}</p><div class="sum">${body}</div>
+  ${estimateHtml()}
+  <div class="note"><b>${t("privacy")}.</b> ${t("privacyText")}</div>
+  <label class="check"><input type="checkbox" id="consent"><span>${t("consent")}</span></label><div class="err" id="cerr" style="display:none">${t("required")}</div>
+  <div class="hp" aria-hidden="true"><label>Website <input id="hp" tabindex="-1" autocomplete="off"></label></div>
+  <div class="actions"><button class="btn ghost" id="bk">${t("back")}</button><button class="btn" id="send">${t("send")}</button></div><div class="err" id="serr" style="display:none"></div>`,secs.length,secs.length+1);
+  document.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>renderStep(+b.dataset.edit));
+  $("#bk").onclick=()=>renderStep(secs.length-1);
+  $("#send").onclick=submit;
+}
+
+function showErr(id,msg){const e=$(id);e.textContent=msg;e.style.display=msg?"block":"none"}
+
+async function uploadOne(item){
+  const f=item.file;
+  const s=await api({action:"start_upload",name:f.name,size:f.size,type:f.type||"application/octet-stream"});
+  if(!s.ok)throw new Error(s.error||"start");
+  if(DEMO){for(let p=0;p<=100;p+=25){item.pct=p;updateBars();await new Promise(r=>setTimeout(r,120))}return}
+  await new Promise((res,rej)=>{
+    const x=new XMLHttpRequest();x.open("PUT",s.uploadUrl);
+    x.upload.onprogress=e=>{if(e.lengthComputable){item.pct=Math.round(e.loaded/e.total*100);updateBars()}};
+    x.onload=()=>(x.status>=200&&x.status<300)?res():rej(new Error("upload "+x.status));x.onerror=()=>rej(new Error("network"));x.send(f);
+  });
+}
+function updateBars(){document.querySelectorAll(".file .bar b").forEach((b,i)=>{if(files[i])b.style.width=files[i].pct+"%"})}
+
+async function submit(){
+  if(sending)return;
+  if(!$("#consent").checked){showErr("#cerr",t("required"));$("#cerr").style.display="block";return}
+  sending=true;const btn=$("#send");btn.disabled=true;btn.textContent=t("sending");showErr("#serr","");
+  try{
+    // show per-file progress on the review page
+    const list=document.createElement("div");list.innerHTML=files.map(fileRow).join("");btn.parentElement.after(list);
+    for(const it of files){ if(it.done)continue; await uploadOne(it); it.done=true; it.pct=100; updateBars(); }
+  }catch(e){sending=false;btn.disabled=false;btn.textContent=t("send");showErr("#serr",t("uploadFail"));bigFileModal();return}
+  try{
+    // drop answers to questions that are hidden by an earlier choice, so stale text is never saved
+    Q[client.project].forEach(sec=>sec.f.forEach(f=>{if(!vis(f)){delete answers[f.id]}}));
+    const qa=[];Q[client.project].forEach(sec=>entries(sec,"en").forEach(({q,a})=>qa.push({section:sec.t.en,question:q,answer:a})));
+    qa.push({section:"Your package",question:"Estimate shown to the client (indicative, not a quote)",answer:estimateText()});
+    const r=await api({action:"submit",lang,answers,qa,files:files.map(f=>({name:f.file.name,size:f.file.size})),
+      consent:true,hp:$("#hp").value,elapsedMs:Date.now()-started});
+    if(!r.ok)throw new Error(r.error||"submit");
+    clearSaved();
+    shell(`<div class="done"><div class="tick">✓</div><h2>${t("doneTitle")}</h2><p class="sub">${t("doneText")}</p></div>`,0,0);
+  }catch(e){sending=false;btn.disabled=false;btn.textContent=t("send");showErr("#serr",t("submitFail"))}
+}
+
+/* Package chosen on proposal.html arrives as ?pkg={r,w,fu,l,a,rep,best}. Applied once per link. */
+function applyPkg(){
+  const raw=params.get("pkg");if(!raw||answers._pkgApplied===raw)return;
+  let p;try{p=JSON.parse(raw)}catch(e){return}
+  const f=id=>SEC.package.f.find(x=>x.id===id), opt=(id,i)=>f(id).o.en[i];
+  const route=p.r==="own"?"own":"build", key={own2:"starter",own4:"standard",build2:"lgstarter",build4:"lgfull"}[route+(+p.w===2?2:4)];
+  answers.list_choice=opt("list_choice",route==="own"?0:1);
+  answers.bundle=p.best?PRICING.best.en:bLabel(PRICING.bundles.find(b=>b.key===key),"en");
+  answers.followup=opt("followup",p.fu?0:1);
+  answers.lang_count=opt("lang_count",Math.min(3,Math.max(0,(+p.l||1)-1)));
+  if(route==="build")answers.areas=opt("areas",Math.min(3,Math.max(0,+p.a||0)));else delete answers.areas;
+  answers.first_project=opt("first_project",p.rep?1:0);
+  answers._pkgApplied=raw;save();
+}
+/* ----------------------------------- boot ----------------------------------- */
+function setLang(l){lang=l;$("#lEN").setAttribute("aria-pressed",l==="en");$("#lDE").setAttribute("aria-pressed",l==="de");document.documentElement.lang=l;save();if(client)(step>=0&&$("#frm"))?renderStep(step):$("#send")?renderReview():renderWelcome()}
+$("#lEN").onclick=()=>setLang("en");$("#lDE").onclick=()=>setLang("de");
+(async()=>{
+  loadSaved();applyPkg();if(params.get("lang")==="de"||params.get("lang")==="en")lang=params.get("lang");setLang(lang);
+  const h=await hello();
+  if(h.done){shell(`<div class="done"><div class="tick">✓</div><h2>${t("doneTitle")}</h2><p class="sub">${t("doneText")}</p></div>`,0,0);return}
+  if(!h.ok||!Q[h.project||"general"]){shell(`<h2>${t("invalid")}</h2>`,0,0);return}
+  client={name:h.name||"",project:h.project||"general"};if(h.lang&&!params.get("lang")&&!localStorage.getItem(KEY))setLang(h.lang);
+  renderWelcome();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Proposal | Be Your Own Star</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%2316130f%27/%3E%3Cpath d=%27M16 5l3.1 6.9 7.5.8-5.6 5 1.6 7.4L16 21.2l-6.6 3.9 1.6-7.4-5.6-5 7.5-.8z%27 fill=%27%23b8923a%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7f2;--card:#fff;--ink:#16130f;--muted:#6b645a;--line:#e6dfd3;--gold:#b8923a;--gold-d:#8f6f26;--gold-soft:#f6efde;--dark:#16130f;--on-dark:#faf7f2}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12100d;--card:#1b1814;--ink:#f3eee6;--muted:#a79f92;--line:#322d25;--gold:#d3ad5b;--gold-d:#e2c27c;--gold-soft:#2a2418;--dark:#0b0a08;--on-dark:#f3eee6}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;padding-bottom:84px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+header{padding:24px 0 4px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font:600 26px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.02em}.brand span{color:var(--gold)}
+.lang button{background:none;border:1px solid var(--line);color:var(--muted);padding:6px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:13px}
+.lang button[aria-pressed=true]{border-color:var(--gold);color:var(--ink)}
+h1{font:600 clamp(36px,6vw,56px)/1.05 "Cormorant Garamond",Georgia,serif;margin:8px 0 14px}
+h2{font:600 32px/1.15 "Cormorant Garamond",Georgia,serif;margin:0 0 6px}
+p{margin:0 0 12px}
+.sub{color:var(--muted);margin-bottom:18px}
+section{margin-top:56px}
+/* hero */
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:center;padding-top:26px}
+.eyebrow{color:var(--gold-d);font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.lede{font-size:19px;color:var(--muted);max-width:34ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:14px}
+.chip svg{width:16px;height:16px;color:var(--gold-d)}
+.startbox{background:var(--dark);color:var(--on-dark);border-radius:22px;padding:28px;box-shadow:0 18px 40px -20px rgba(0,0,0,.45)}
+.startbox .k{font:600 15px Inter;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+.startbox h3{font:600 30px/1.15 "Cormorant Garamond",Georgia,serif;margin:6px 0 10px}
+.startbox p{color:#cfc7ba;font-size:15px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-weight:600;border-radius:999px;padding:14px 26px;border:1px solid var(--gold);cursor:pointer;background:var(--gold);color:#fff;text-decoration:none;transition:transform .15s,background .15s}
+.btn:hover{background:var(--gold-d);transform:translateY(-1px)}
+.btn.xl{font-size:18px;padding:18px 30px;width:100%}
+.btn svg{width:20px;height:20px}
+.btn.ghost{background:none;color:inherit;border-color:currentColor;opacity:.85}
+.link{color:var(--gold-d);background:none;border:0;padding:0;font:inherit;cursor:pointer;text-decoration:underline}
+.startbox .link{color:var(--gold)}
+/* timeline */
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px;position:relative}
+.timeline::before{content:"";position:absolute;top:30px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--gold),var(--line))}
+.tl{text-align:center;position:relative}
+.tl .ic{width:60px;height:60px;border-radius:50%;background:var(--card);border:2px solid var(--gold);display:grid;place-items:center;margin:0 auto 10px;color:var(--gold-d)}
+.tl .ic svg{width:26px;height:26px}
+.tl b{display:block;margin-bottom:2px}
+.tl small{color:var(--muted);font-size:14px;line-height:1.45;display:block}
+.pill{display:inline-block;margin-top:18px;background:var(--gold-soft);color:var(--gold-d);border-radius:999px;padding:6px 14px;font-weight:600;font-size:14px}
+/* builder */
+.builder{display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:start;margin-top:18px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:14px}
+.q h3{margin:0 0 12px;font-size:16px;display:flex;align-items:center;gap:10px}
+.q h3 .n{width:26px;height:26px;border-radius:50%;background:var(--gold-soft);color:var(--gold-d);display:grid;place-items:center;font-size:13px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{border:1.5px solid var(--line);background:var(--bg);border-radius:14px;padding:14px;text-align:left;cursor:pointer;font:inherit;color:inherit;display:flex;gap:12px;align-items:flex-start;position:relative}
+.opt svg{width:28px;height:28px;color:var(--gold-d);flex:none}
+.opt b{display:block}.opt small{color:var(--muted)}
+.opt[aria-pressed=true]{border-color:var(--gold);background:var(--gold-soft);box-shadow:0 0 0 1px var(--gold) inset}
+.opt .tag{position:absolute;top:-10px;right:12px;background:var(--gold);color:#fff;font-size:11px;font-weight:600;border-radius:999px;padding:2px 9px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0;padding-top:0}
+.row .t b{display:block}.row .t small{color:var(--muted)}
+.row.off{opacity:.4;pointer-events:none}
+.sw{width:50px;height:28px;border-radius:999px;background:var(--line);border:0;position:relative;cursor:pointer;flex:none}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.sw[aria-checked=true]{background:var(--gold)}.sw[aria-checked=true]::after{left:25px}
+.stp{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:12px;overflow:hidden;flex:none}
+.stp button{width:36px;height:36px;border:0;background:var(--bg);color:var(--ink);font-size:18px;cursor:pointer}
+.stp output{min-width:38px;text-align:center;font-weight:600}
+.summary{position:sticky;top:16px;background:var(--card);border:2px solid var(--gold);border-radius:20px;overflow:hidden}
+.summary .head{background:var(--dark);color:var(--on-dark);padding:18px 20px}
+.summary .head small{color:var(--gold);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+.summary .head h3{margin:4px 0 0;font:600 26px/1.15 "Cormorant Garamond",Georgia,serif}
+.lines{padding:14px 20px 4px;font-size:15px}
+.ln{display:flex;justify-content:space-between;gap:12px;padding:5px 0}
+.ln span:last-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+.tot{display:flex;justify-content:space-between;align-items:baseline;padding:12px 20px;border-top:1px dashed var(--line)}
+.tot b{font:600 40px/1 "Cormorant Garamond",Georgia,serif;color:var(--gold-d)}
+.summary .foot{padding:0 20px 20px}
+.summary .btn.xl{font-size:16px;padding:16px 18px;white-space:nowrap}
+.fine{color:var(--muted);font-size:13px;margin:8px 0 14px}
+/* needs + next */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.tile svg{width:30px;height:30px;color:var(--gold-d);margin-bottom:8px}
+.tile b{display:block}.tile small{color:var(--muted);font-size:14px}
+.next{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:16px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card)}
+.nx{padding:16px;border-left:1px solid var(--line)}.nx:first-child{border-left:0}
+.nx .num{font:600 30px/1 "Cormorant Garamond",Georgia,serif;color:var(--gold)}
+.nx b{display:block;margin-top:4px}.nx small{color:var(--muted);font-size:14px}
+.nx.here{background:var(--gold-soft)}
+details{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 18px}
+summary{cursor:pointer;font-weight:600}
+.tbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:15px}
+.tbl th,.tbl td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:left}
+.tbl td:not(:first-child),.tbl th:not(:first-child){text-align:right;white-space:nowrap}
+.scroll{overflow-x:auto}
+.closing{margin-top:56px;text-align:center}
+.closing .sign{color:var(--muted)}
+footer{margin:40px 0 20px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;text-align:center}
+/* sticky bar */
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--dark);color:var(--on-dark);z-index:5;box-shadow:0 -8px 24px rgba(0,0,0,.18)}
+.bar .in{max-width:1000px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.bar .sum{font-size:14px;color:#cfc7ba;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .sum b{color:var(--on-dark);font-size:18px;margin-left:6px}
+@media (max-width:860px){
+ .hero{grid-template-columns:1fr}.builder{grid-template-columns:1fr}.summary{position:static}
+ .timeline{grid-template-columns:1fr;gap:14px}.timeline::before{display:none}
+ .tl{display:flex;gap:14px;text-align:left;align-items:flex-start}.tl .ic{margin:0;width:52px;height:52px;flex:none}
+ .tiles{grid-template-columns:1fr 1fr}.next{grid-template-columns:1fr 1fr}.nx:nth-child(3){border-left:0}.nx:nth-child(n+3){border-top:1px solid var(--line)}
+}
+.bar .btn{white-space:nowrap;flex:none}
+@media (max-width:520px){.opts{grid-template-columns:1fr}.tiles{grid-template-columns:1fr}.bar .sum span{display:none}
+ .bar .sum{overflow:visible;font-size:13px}.bar .sum b{font-size:17px;margin-left:4px}.bar .btn{padding:11px 16px;font-size:15px}.bar .btn svg{width:16px;height:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Be Your Own <span>Star</span></div>
+    <div class="lang" role="group" aria-label="Language"><button id="lEN" aria-pressed="true">EN</button> <button id="lDE" aria-pressed="false">DE</button></div>
+  </header>
+  <main id="app"></main>
+</div>
+<div class="bar" id="bar"></div>
+
+<script src="pricing.js"></script>
+<script>
+/* ============================ CONFIG (edit here) ============================ */
+const CFG={CONTACT_EMAIL:"jacobpscott16@gmail.com", FORM:"index.html"};
+/* ============================================================================ */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const params=new URLSearchParams(location.search);
+let lang=(params.get("lang")||navigator.language||"en").toLowerCase().startsWith("de")?"de":"en";
+const G=GRID, eur=n=>lang==="de"?`${n} €`:`€${n}`;
+
+/* small line icons (inline SVG, currentColor) */
+const I=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const ICON={
+ form:I('<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/>'),
+ build:I('<path d="M4 20h16M6 16l4-10 4 6 2-3 2 7"/>'),
+ send:I('<path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/>'),
+ chat:I('<path d="M4 5h16v10H9l-5 4z"/>'),
+ list:I('<path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>'),
+ target:I('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>'),
+ mic:I('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/>'),
+ link:I('<path d="M10 14a4 4 0 006 0l3-3a4 4 0 00-6-6l-1 1"/><path d="M14 10a4 4 0 00-6 0l-3 3a4 4 0 006 6l1-1"/>'),
+ check:I('<path d="M4 12l5 5L20 6"/>'),
+ search:I('<circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/>'),
+ have:I('<path d="M4 6h16v12H4z"/><path d="M4 9h16M8 13h5"/>'),
+ arrow:I('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+ shield:I('<path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/>'),
+ person:I('<circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6"/>')
+};
+
+const C={
+ en:{tab:"Proposal | Be Your Own Star",eyebrow:"Outreach proposal",title:"Let's reach the right people for your project",
+  lede:"We find the people who fit what you offer, write to each one personally, and introduce you to the ones who are interested.",
+  trust:["Researched one by one","No mass mailing","Only public contact details"],
+  boxK:"Ready when you are",boxH:"Pick your package below, then start your questionnaire",boxP:"About 15 minutes. Your package choices are filled in for you.",
+  start:"Start your questionnaire",jump:"Build my package first",
+  howH:"How it works",howP:"Five steps from your first answers to the right introductions.",
+  steps:[["form","Questionnaire","15 minutes online. Upload photos, demos, or a press kit."],["build","Set-up","We build the campaign. You approve a test batch first."],["send","Sprints","Personal emails in 2- or 4-week blocks, about 240 contacts per 4 weeks."],["chat","Replies","Sent from Be Your Own Star. Christina introduces the right people."],["list","Your list","The full contact list after every sprint, yours to keep."]],
+  noContract:"No long-term contract. You decide after every sprint.",
+  pkgH:"Build your package",pkgP:"Choose what fits. Your estimate updates as you go and is carried into your questionnaire.",
+  q1:"Do you already have a list of people to contact?",haveB:"Yes, I have a list",haveS:"We write to the people you give us.",findB:"No, find them for me",findS:"We search, research, and qualify new contacts.",rec:"Recommended",
+  q2:"How long should it run?",w2:"2 weeks",w2s:"about 120 contacts",w4:"4 weeks",w4s:"about 240 contacts",
+  q3:"Extras",fuB:"7-day follow-up",fuS:"One friendly reminder. Often doubles the replies.",langB:"Email languages",langS:"One is included. Each extra language",areaB:"Extra search areas",areaS:"Another region, genre, or target group",repB:"I have worked with you before",repS:"Returning clients get a reduced set-up.",each:"each",
+  yourPkg:"Your package",estimate:"Estimated total",fine:"Net prices; VAT is added where it applies. We confirm a final quote after your questionnaire.",
+  notSure:"Not sure? Let us recommend a package",bundleBest:"We recommend your package",
+  lnRepeat:"Returning client: reduced set-up",lnFu:"7-day follow-up",lnLang:n=>`${n} extra language${n>1?"s":""}`,lnArea:n=>`${n} extra search area${n>1?"s":""}`,
+  listOnly:"Only need a list, no sending? We research up to about 150 people for {p}.",ask:"Ask us",
+  priceH:"Full price list",th:["","You have a list","We find the people"],rows:["Set-up, one time","4-week sprint","2-week sprint","New project, returning client"],
+  extrasTh:["Extra (paid once)","Price"],extras:[["Follow-up email",()=>eur(G.followup)],["Extra search area",()=>eur(G.area)+" each"],["Extra language (one included)",()=>eur(G.language)+" each"],["Just the list, no sending",()=>eur(G.list)]],
+  more:"Each further 4-week sprint: {a}, or {b} with lead generation.",
+  needH:"What we will ask you",needP:"The questionnaire walks you through these four.",
+  needs:[["target","Your goal","What you want from this outreach."],["person","Who you want to reach","The people, places, or organizations that fit."],["link","Your work","Spotify, Apple Music, YouTube, your demo and files."],["check","Offer and approvals","What you offer, any deadline, who approves."]],
+  nextH:"What happens next",next:[["Choose","your package here"],["Answer","the 15-minute questionnaire"],["Confirm","your final quote"],["Review","your first test batch within about a week"]],here:"You are here",
+  pay:"Set-up is paid before the build, each sprint at its start. Introductory rates for our first clients.",
+  bye:"We are really looking forward to working with you.",sign:"Jacob Scott · Outreach & Automation, in partnership with Be Your Own Star",
+  foot:"Questions? Write to {m}.",barTotal:"Estimate"},
+ de:{tab:"Angebot | Be Your Own Star",eyebrow:"Outreach-Angebot",title:"Erreichen wir die richtigen Menschen für Ihr Projekt",
+  lede:"Wir finden die Menschen, die zu Ihrem Angebot passen, schreiben jede Person persönlich an und stellen Ihnen die Interessierten vor.",
+  trust:["Einzeln recherchiert","Keine Massenmails","Nur öffentliche Kontaktdaten"],
+  boxK:"Bereit, wenn Sie es sind",boxH:"Wählen Sie unten Ihr Paket und starten Sie dann den Fragebogen",boxP:"Etwa 15 Minuten. Ihre Paketauswahl ist bereits eingetragen.",
+  start:"Fragebogen starten",jump:"Zuerst Paket zusammenstellen",
+  howH:"So funktioniert es",howP:"Fünf Schritte von Ihren ersten Antworten bis zu den richtigen Kontakten.",
+  steps:[["form","Fragebogen","15 Minuten online. Fotos, Demos oder Pressekit hochladen."],["build","Einrichtung","Wir bauen die Kampagne. Sie geben zuerst einen Testversand frei."],["send","Sprints","Persönliche E-Mails in Blöcken von 2 oder 4 Wochen, etwa 240 Personen pro 4 Wochen."],["chat","Antworten","Versand über Be Your Own Star. Christina stellt Ihnen die passenden Personen vor."],["list","Ihre Liste","Die vollständige Kontaktliste nach jedem Sprint, sie gehört Ihnen."]],
+  noContract:"Kein langfristiger Vertrag. Sie entscheiden nach jedem Sprint.",
+  pkgH:"Stellen Sie Ihr Paket zusammen",pkgP:"Wählen Sie, was passt. Die Schätzung aktualisiert sich laufend und wird in Ihren Fragebogen übernommen.",
+  q1:"Haben Sie bereits eine Liste mit Kontakten?",haveB:"Ja, ich habe eine Liste",haveS:"Wir schreiben die Personen an, die Sie uns geben.",findB:"Nein, bitte finden Sie sie",findS:"Wir suchen, recherchieren und prüfen neue Personen.",rec:"Empfohlen",
+  q2:"Wie lange soll es laufen?",w2:"2 Wochen",w2s:"etwa 120 Personen",w4:"4 Wochen",w4s:"etwa 240 Personen",
+  q3:"Extras",fuB:"Follow-up nach 7 Tagen",fuS:"Eine freundliche Erinnerung. Verdoppelt oft die Antworten.",langB:"Sprachen der E-Mails",langS:"Eine ist inklusive. Jede weitere Sprache",areaB:"Zusätzliche Suchbereiche",areaS:"Weitere Region, Genre oder Zielgruppe",repB:"Wir haben schon zusammengearbeitet",repS:"Bestehende Kunden zahlen eine reduzierte Einrichtung.",each:"je",
+  yourPkg:"Ihr Paket",estimate:"Geschätzte Summe",fine:"Nettopreise; die Mehrwertsteuer kommt hinzu, wo sie anfällt. Nach dem Fragebogen bestätigen wir ein endgültiges Angebot.",
+  notSure:"Unsicher? Lassen Sie uns ein Paket empfehlen",bundleBest:"Wir empfehlen Ihr Paket",
+  lnRepeat:"Bestehender Kunde: reduzierte Einrichtung",lnFu:"Follow-up nach 7 Tagen",lnLang:n=>`${n} zusätzliche Sprache${n>1?"n":""}`,lnArea:n=>`${n} zusätzliche(r) Suchbereich(e)`,
+  listOnly:"Sie brauchen nur eine Liste, ohne Versand? Wir recherchieren bis zu etwa 150 Personen für {p}.",ask:"Fragen Sie uns",
+  priceH:"Vollständige Preisliste",th:["","Sie haben eine Liste","Wir finden die Personen"],rows:["Einrichtung, einmalig","4-Wochen-Sprint","2-Wochen-Sprint","Neues Projekt, bestehender Kunde"],
+  extrasTh:["Extra (einmalig)","Preis"],extras:[["Follow-up-E-Mail",()=>eur(G.followup)],["Zusätzlicher Suchbereich",()=>"je "+eur(G.area)],["Zusätzliche Sprache (eine inklusive)",()=>"je "+eur(G.language)],["Nur die Liste, kein Versand",()=>eur(G.list)]],
+  more:"Jeder weitere 4-Wochen-Sprint: {a}, mit Lead-Generierung {b}.",
+  needH:"Was wir Sie fragen",needP:"Der Fragebogen führt Sie durch diese vier Punkte.",
+  needs:[["target","Ihr Ziel","Was Sie mit der Kampagne erreichen möchten."],["person","Wen Sie erreichen möchten","Die Menschen, Orte oder Organisationen, die passen."],["link","Ihre Arbeit","Spotify, Apple Music, YouTube, Ihr Demo und Dateien."],["check","Angebot und Freigabe","Was Sie anbieten, ein Termin, wer freigibt."]],
+  nextH:"Wie es weitergeht",next:[["Wählen","Sie hier Ihr Paket"],["Beantworten","Sie den 15-Minuten-Fragebogen"],["Bestätigen","Sie Ihr endgültiges Angebot"],["Prüfen","Sie Ihren ersten Testversand nach etwa einer Woche"]],here:"Sie sind hier",
+  pay:"Die Einrichtung wird vor dem Aufbau bezahlt, jeder Sprint zu seinem Beginn. Einführungspreise für unsere ersten Kunden.",
+  bye:"Wir freuen uns sehr auf die Zusammenarbeit.",sign:"Jacob Scott · Outreach & Automation, in Partnerschaft mit Be Your Own Star",
+  foot:"Fragen? Schreiben Sie an {m}.",barTotal:"Schätzung"}
+};
+
+/* Project packs: override only the words that differ from the generic copy. Pick with ?p=<project>. */
+const PC={"singer-search":{
+ en:{title:"Let's find the right voice for your song",lede:"We find singers who fit your song, write to each one personally, and introduce you to the ones who are interested.",
+  q1:"Do you already have a list of singers?",haveS:"We write to the singers you give us.",findS:"We search, research, and qualify new singers.",
+  w2s:"about 120 singers",w4s:"about 240 singers",areaS:"Another region, genre, or voice type",listOnly:"Only need a list, no sending? We research up to about 150 singers for {p}.",
+  th:["","You have a list","We find the singers"],
+  needs:[["target","Your goal","What you want from this outreach."],["mic","Your ideal singer","Style, voice, language, location."],["link","Your work","Spotify, Apple Music, YouTube, your demo and files."],["check","Offer and approvals","What you offer, any deadline, who approves."]]},
+ de:{title:"Finden wir die richtige Stimme für Ihren Song",lede:"Wir finden Sängerinnen und Sänger, die zu Ihrem Song passen, schreiben jede Person persönlich an und stellen Ihnen die Interessierten vor.",
+  q1:"Haben Sie bereits eine Liste mit Sängerinnen und Sängern?",areaS:"Weitere Region, Genre oder Stimmlage",
+  needs:[["target","Ihr Ziel","Was Sie mit der Kampagne erreichen möchten."],["mic","Ihre ideale Stimme","Stil, Stimme, Sprache, Standort."],["link","Ihre Arbeit","Spotify, Apple Music, YouTube, Ihr Demo und Dateien."],["check","Angebot und Freigabe","Was Sie anbieten, ein Termin, wer freigibt."]]}}};
+const PROJECT=PC[params.get("p")]?params.get("p"):"general";
+const cc=()=>({...C[lang],...((PC[PROJECT]||{})[lang]||{})});
+
+/* package state: defaults to the recommended Lead Gen Full with follow-up */
+let S={r:"build",w:4,fu:true,l:1,a:0,rep:false,best:false};
+function bundle(){const key={own2:"starter",own4:"standard",build2:"lgstarter",build4:"lgfull"}[S.r+S.w];return PRICING.bundles.find(b=>b.key===key)}
+function calc(){
+  const c=cc(),b=bundle(),L=[];let total=0;
+  if(S.best){L.push([c.bundleBest,null])}else{L.push([b.name+" · "+b.incl[lang],b.price]);total+=b.price;if(S.rep){L.push([c.lnRepeat,-b.refresh]);total-=b.refresh}}
+  if(S.fu){L.push([c.lnFu,G.followup]);total+=G.followup}
+  if(S.l>1){L.push([c.lnLang(S.l-1),(S.l-1)*G.language]);total+=(S.l-1)*G.language}
+  if(S.r==="build"&&S.a>0){L.push([c.lnArea(S.a),S.a*G.area]);total+=S.a*G.area}
+  return {L,total,title:S.best?c.bundleBest:b.name};
+}
+function startUrl(){
+  const q=new URLSearchParams();["c","name"].forEach(k=>params.get(k)&&q.set(k,params.get(k)));if(PROJECT!=="general")q.set("p",PROJECT);q.set("lang",lang);
+  q.set("pkg",JSON.stringify({r:S.r,w:S.w,fu:S.fu?1:0,l:S.l,a:S.r==="build"?S.a:0,rep:S.rep?1:0,best:S.best?1:0}));
+  return CFG.FORM+"?"+q;
+}
+const sw=(id,on)=>`<button class="sw" role="switch" aria-checked="${on}" data-sw="${id}"></button>`;
+const stp=(id,v)=>`<div class="stp"><button data-dec="${id}" aria-label="-">−</button><output>${v}</output><button data-inc="${id}" aria-label="+">+</button></div>`;
+
+function renderPkg(){
+  const c=cc(),e=calc();
+  $("#pkg").innerHTML=`
+   <div>
+    <div class="q"><h3><span class="n">1</span>${c.q1}</h3><div class="opts">
+      <button class="opt" data-r="own" aria-pressed="${S.r==="own"}">${ICON.have}<span><b>${c.haveB}</b><small>${c.haveS}</small></span></button>
+      <button class="opt" data-r="build" aria-pressed="${S.r==="build"}"><span class="tag">${c.rec}</span>${ICON.search}<span><b>${c.findB}</b><small>${c.findS}</small></span></button></div></div>
+    <div class="q"><h3><span class="n">2</span>${c.q2}</h3><div class="opts">
+      <button class="opt" data-w="2" aria-pressed="${S.w===2}"><span><b>${c.w2}</b><small>${c.w2s}</small></span></button>
+      <button class="opt" data-w="4" aria-pressed="${S.w===4}"><span><b>${c.w4}</b><small>${c.w4s}</small></span></button></div></div>
+    <div class="q"><h3><span class="n">3</span>${c.q3}</h3>
+      <div class="row"><div class="t"><b>${c.fuB} · ${eur(G.followup)}</b><small>${c.fuS}</small></div>${sw("fu",S.fu)}</div>
+      <div class="row"><div class="t"><b>${c.langB}</b><small>${c.langS} ${eur(G.language)}</small></div>${stp("l",S.l)}</div>
+      <div class="row${S.r==="build"?"":" off"}"><div class="t"><b>${c.areaB} · ${eur(G.area)} ${c.each}</b><small>${c.areaS}</small></div>${stp("a",S.r==="build"?S.a:0)}</div>
+      <div class="row"><div class="t"><b>${c.repB}</b><small>${c.repS}</small></div>${sw("rep",S.rep)}</div></div>
+   </div>
+   <aside class="summary"><div class="head"><small>${c.yourPkg}</small><h3>${esc(e.title)}</h3></div>
+    <div class="lines">${e.L.map(([t,v])=>`<div class="ln"><span>${esc(t)}</span><span>${v===null?"":(v<0?"− ":"")+eur(Math.abs(v))}</span></div>`).join("")}</div>
+    <div class="tot"><span>${c.estimate}</span><b>${S.best&&!e.total?"–":(S.best?"+ ":"")+eur(e.total)}</b></div>
+    <div class="foot"><p class="fine">${c.fine}</p><a class="btn xl" href="${esc(startUrl())}">${c.start} ${ICON.arrow}</a>
+     <p style="text-align:center;margin:12px 0 0"><button class="link" data-best="1">${S.best?"✓ ":""}${c.notSure}</button></p></div></aside>`;
+  $("#bar").innerHTML=`<div class="in"><div class="sum"><span>${c.yourPkg}: ${esc(e.title)} · </span>${c.barTotal}<b>${S.best&&!e.total?"–":(S.best?"+ ":"")+eur(e.total)}</b></div><a class="btn" href="${esc(startUrl())}">${c.start} ${ICON.arrow}</a></div>`;
+  document.querySelectorAll(".startbox a.btn").forEach(a=>a.href=startUrl());
+}
+
+function render(){
+  const c=cc();document.title=c.tab;document.documentElement.lang=lang;
+  $("#lEN").setAttribute("aria-pressed",lang==="en");$("#lDE").setAttribute("aria-pressed",lang==="de");
+  const name=params.get("name");
+  const grid=[[G.base.setup,G.base.setup+G.lg.setup],[G.base.s4,G.base.s4+G.lg.s4],[G.base.s2,G.base.s2+G.lg.s2],[G.base.refresh,G.base.refresh+G.lg.refresh]];
+  $("#app").innerHTML=`
+  <section class="hero" style="margin-top:0">
+    <div><div class="eyebrow">${c.eyebrow}${name?" · "+esc(name):""}</div><h1>${c.title}</h1><p class="lede">${c.lede}</p>
+      <div class="chips">${c.trust.map(t=>`<span class="chip">${ICON.shield}${t}</span>`).join("")}</div></div>
+    <div class="startbox"><div class="k">${c.boxK}</div><h3>${c.boxH}</h3><p>${c.boxP}</p>
+      <a class="btn xl" href="#">${c.start} ${ICON.arrow}</a>
+      <p style="text-align:center;margin:12px 0 0"><a class="link" href="#build">${c.jump}</a></p></div>
+  </section>
+  <section><h2>${c.howH}</h2><p class="sub">${c.howP}</p>
+    <div class="timeline">${c.steps.map(([ic,h,t])=>`<div class="tl"><div class="ic">${ICON[ic]}</div><div><b>${h}</b><small>${t}</small></div></div>`).join("")}</div>
+    <span class="pill">${c.noContract}</span></section>
+  <section id="build"><h2>${c.pkgH}</h2><p class="sub">${c.pkgP}</p><div class="builder" id="pkg"></div>
+    <p class="fine" style="margin-top:4px">${c.listOnly.replace("{p}",eur(G.list))} <a class="link" href="mailto:${esc(CFG.CONTACT_EMAIL)}">${c.ask}</a></p>
+    <details><summary>${c.priceH}</summary><div class="scroll">
+      <table class="tbl"><tr>${c.th.map(h=>`<th>${h}</th>`).join("")}</tr>${c.rows.map((r,i)=>`<tr><td>${r}</td><td>${eur(grid[i][0])}</td><td>${eur(grid[i][1])}</td></tr>`).join("")}</table>
+      <table class="tbl"><tr>${c.extrasTh.map(h=>`<th>${h}</th>`).join("")}</tr>${c.extras.map(([a,f])=>`<tr><td>${a}</td><td>${f()}</td></tr>`).join("")}</table></div>
+      <p class="fine">${c.more.replace("{a}",eur(G.base.s4)).replace("{b}",eur(G.base.s4+G.lg.s4))}</p></details></section>
+  <section><h2>${c.needH}</h2><p class="sub">${c.needP}</p>
+    <div class="tiles">${c.needs.map(([ic,h,t])=>`<div class="tile">${ICON[ic]}<b>${h}</b><small>${t}</small></div>`).join("")}</div></section>
+  <section><h2>${c.nextH}</h2>
+    <div class="next">${c.next.map(([h,t],i)=>`<div class="nx${i===0?" here":""}"><div class="num">${i+1}</div><b>${h}</b><small>${t}${i===0?` · <b style="display:inline;color:var(--gold-d)">${c.here}</b>`:""}</small></div>`).join("")}</div>
+    <p class="fine" style="margin-top:12px">${c.pay}</p></section>
+  <section class="closing"><h2>${c.bye}</h2><p class="sign">${c.sign}</p></section>
+  <footer>${c.foot.replace("{m}",`<a class="link" href="mailto:${esc(CFG.CONTACT_EMAIL)}">${esc(CFG.CONTACT_EMAIL)}</a>`)}</footer>`;
+  renderPkg();
+}
+
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+  if(d.r){S.r=d.r;if(S.r==="own")S.a=0}
+  else if(d.w)S.w=+d.w;
+  else if(d.sw)S[d.sw]=!S[d.sw];
+  else if(d.inc)S[d.inc]=Math.min(d.inc==="l"?4:3,S[d.inc]+1);
+  else if(d.dec)S[d.dec]=Math.max(d.dec==="l"?1:0,S[d.dec]-1);
+  else if(d.best)S.best=!S.best;
+  else return;
+  if(d.r||d.w)S.best=false;      // a concrete choice replaces "let us recommend"
+  renderPkg();
+});
+$("#lEN").onclick=()=>{lang="en";render()};$("#lDE").onclick=()=>{lang="de";render()};
+render();
+</script>
+</body>
+</html>
