@@ -228,6 +228,10 @@ const PREPARE={"general":T(
  "singer-search":T(
  ["Links to your work online (website, streaming, social media)","The demo or recording the singer would work on","What you can offer the singer (a fee, a revenue share, a credit, a release)","Whether you have your own contact list, or want us to build one","Who should approve the emails (with their email address)"],
  ["Links zu Ihrer Arbeit online (Website, Streaming, Social Media)","Das Demo oder die Aufnahme, an der die Stimme arbeiten würde","Was Sie der Stimme anbieten können (Gage, Umsatzbeteiligung, Credit, Veröffentlichung)","Ob Sie eine eigene Kontaktliste haben oder wir eine erstellen sollen","Wer die E-Mails freigibt (mit E-Mail-Adresse)"])};
+/* Bump FORM_VERSION whenever questions are added, removed, or renamed. Each submission stores the version and the
+   list of questions it was answered against, so older and newer submissions can always be read and compared. */
+const FORM_VERSION="2026-11-27.1";
+const formSchema=project=>({version:FORM_VERSION,project,fields:Q[project].flatMap(sec=>sec.f.filter(f=>!["note","estimate"].includes(f.type)).map(f=>({id:f.id,section:sec.id,type:f.type,label:f.l?f.l.en:""})))});
 /* A project = its sections, the extra fields it cannot start without, and its welcome title. */
 const PROJECTS={"general":{sections:["about","goal","audience","work","package","prefs"],required:["ideal"],title:T("Tell us about your project","Erzählen Sie uns von Ihrem Projekt")},
  "singer-search":{sections:["about","goal","singer","project","work","package","prefs"],required:["ideal","demo"],title:T("Let's find your voice","Lassen Sie uns Ihre Stimme finden")}};
@@ -485,7 +489,7 @@ async function submit(){
     Q[client.project].forEach(sec=>sec.f.forEach(f=>{if(!vis(f)){delete answers[f.id]}}));
     const qa=[];Q[client.project].forEach(sec=>entries(sec,"en").forEach(({q,a})=>qa.push({section:sec.t.en,question:q,answer:a})));
     qa.push({section:"Your package",question:"Estimate shown to the client (indicative, not a quote)",answer:estimateText()});
-    const r=await api({action:"submit",lang,answers,qa,files:files.map(f=>({name:f.file.name,size:f.file.size})),
+    const r=await api({action:"submit",lang,answers,qa,schema:formSchema(client.project),files:files.map(f=>({name:f.file.name,size:f.file.size})),
       consent:true,hp:$("#hp").value,elapsedMs:Date.now()-started});
     if(!r.ok)throw new Error(r.error||"submit");
     clearSaved();
